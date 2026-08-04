@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Страница не найдена | ZRT School</title>
+    <meta name="description" content="Такой страницы на сайте школы мотокросса ZRT нет.">
+    <meta name="robots" content="noindex">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* Страница намеренно самодостаточна: она должна открыться, даже если
+           основной styles-improved.css не доехал до сервера. */
+        :root { --primary: #E63946; --dark: #1D3557; --muted: #6C757D; }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(160deg, #F8F9FA 0%, #EDF2F4 100%);
+            color: var(--dark);
+            padding: 24px;
+        }
+        .box { max-width: 520px; text-align: center; }
+        .code { font-size: 96px; font-weight: 900; line-height: 1; color: var(--primary); margin: 0; }
+        h1 { font-size: 28px; margin: 16px 0 8px; }
+        p { color: var(--muted); font-size: 17px; line-height: 1.6; margin: 0 0 32px; }
+        .btn {
+            display: inline-block;
+            padding: 16px 32px;
+            border-radius: 8px;
+            background: var(--primary);
+            color: #fff;
+            font-weight: 700;
+            text-decoration: none;
+            transition: transform .15s ease, box-shadow .15s ease;
+        }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(230, 57, 70, .3); }
+        .phone { display: block; margin-top: 24px; color: var(--dark); font-weight: 600; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <p class="code">404</p>
+        <h1>Такой страницы нет</h1>
+        <p>Возможно, акция уже закончилась или в ссылке опечатка. Загляните на главную — там актуальные условия тренировок.</p>
+        <a class="btn" href="/">На главную</a>
+        <a class="phone" href="tel:84996459926">Или позвоните: 8-499-645-99-26</a>
+    </div>
+</body>
+</html>

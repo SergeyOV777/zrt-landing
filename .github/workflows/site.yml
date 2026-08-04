@@ -1,0 +1,130 @@
+# Публикация сайта adv.zrt-school.ru.
+#
+# pull request  → проверка + черновик на /_preview/pr-<номер>/ и ссылка в PR
+# merge в main  → проверка + публикация на боевой адрес
+#
+# Ключ выката лежит только в секретах GitHub (ADV_SSH_PRIVATE_KEY) и на сервере
+# прибит к одному скрипту. Локально с ноутбука сайт выложить нельзя — это осознанно:
+# так утечка ноутбука не даёт доступа к серверу.
+name: Сайт adv.zrt-school.ru
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  # На main выкаты выстраиваются в очередь: отменять публикацию на середине нельзя.
+  # В pull request'ах, наоборот, свежий пуш отменяет предыдущую сборку черновика.
+  group: adv-site-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: Проверка страниц
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Проверить содержимое site/
+        run: node scripts/check-site.mjs
+
+  preview:
+    name: Черновик для проверки
+    needs: check
+    # Секреты недоступны PR-ам из форков — черновик собираем только для веток
+    # этого же репозитория (Codex пушит именно так).
+    if: >-
+      github.event_name == 'pull_request' &&
+      github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Подготовить ssh-ключ
+        run: |
+          set -euo pipefail
+          mkdir -p ~/.ssh && chmod 700 ~/.ssh
+          printf '%s\n' "${{ secrets.ADV_SSH_PRIVATE_KEY }}" > ~/.ssh/adv_ci
+          chmod 600 ~/.ssh/adv_ci
+          printf '%s\n' "${{ secrets.ADV_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+
+      - name: Залить черновик на сервер
+        run: |
+          set -euo pipefail
+          tar -czf - -C site . \
+            | ssh -i ~/.ssh/adv_ci -o IdentitiesOnly=yes -o BatchMode=yes \
+                  advdeploy@"${{ secrets.ADV_DEPLOY_HOST }}" "preview pr-${{ github.event.number }}"
+
+      - name: Оставить ссылку в pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ github.event.number }}
+        run: |
+          set -euo pipefail
+          url="https://adv.zrt-school.ru/_preview/pr-${PR}/"
+          body=$(printf '%s\n\n%s\n%s\n' \
+            "🔍 **Черновик готов:** ${url}" \
+            "Так страница будет выглядеть после публикации. Черновик закрыт от поисковиков и удалится сам через 14 дней." \
+            "Чтобы выложить на сайт — нажмите «Merge pull request».")
+          # --edit-last обновляет тот же комментарий при новых пушах; на первом
+          # пуше редактировать нечего, поэтому падаем в обычный комментарий.
+          gh pr comment "$PR" --body "$body" --edit-last 2>/dev/null \
+            || gh pr comment "$PR" --body "$body"
+
+  publish:
+    name: Публикация на adv.zrt-school.ru
+    needs: check
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Подготовить ssh-ключ
+        run: |
+          set -euo pipefail
+          mkdir -p ~/.ssh && chmod 700 ~/.ssh
+          printf '%s\n' "${{ secrets.ADV_SSH_PRIVATE_KEY }}" > ~/.ssh/adv_ci
+          chmod 600 ~/.ssh/adv_ci
+          printf '%s\n' "${{ secrets.ADV_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+
+      - name: Опубликовать
+        run: |
+          set -euo pipefail
+          # Ключ прибит на сервере к forced command: он умеет только принять архив
+          # и переключить симлинк. Ни шелла, ни доступа к соседним проектам.
+          tar -czf - -C site . \
+            | ssh -i ~/.ssh/adv_ci -o IdentitiesOnly=yes -o BatchMode=yes \
+                  advdeploy@"${{ secrets.ADV_DEPLOY_HOST }}"
+
+      - name: Проверить, что сайт открывается
+        run: |
+          set -euo pipefail
+          # Обращаемся к серверу по IP с нужным Host: проверка не зависит от DNS,
+          # кэша Cloudflare и состояния сертификата.
+          code=$(curl -sS -m 20 -o /dev/null -w '%{http_code}' \
+                   -H "Host: adv.zrt-school.ru" "http://${{ secrets.ADV_DEPLOY_HOST }}/")
+          if [ "$code" != "200" ]; then
+            echo "Сайт после публикации отвечает кодом $code вместо 200" >&2
+            exit 1
+          fi
+          echo "Сайт отвечает 200."
+
+          # Публичный адрес проверяем отдельно и мягко: он оживёт только после
+          # переключения A-записи в Cloudflare и выпуска сертификата.
+          public=$(curl -sS -m 20 -o /dev/null -w '%{http_code}' https://adv.zrt-school.ru/ || echo "000")
+          if [ "$public" = "200" ]; then
+            echo "https://adv.zrt-school.ru/ отвечает 200."
+          else
+            echo "::warning::https://adv.zrt-school.ru/ отвечает $public — проверьте A-запись и сертификат (docs/DEPLOY.md)."
+          fi

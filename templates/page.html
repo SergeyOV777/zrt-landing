@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- ЗАПОЛНИТЬ: заголовок вкладки и описание для поиска/соцсетей -->
+    <title>ЗАГОЛОВОК СТРАНИЦЫ | ZRT School</title>
+    <meta name="description" content="ОПИСАНИЕ СТРАНИЦЫ В 1-2 ПРЕДЛОЖЕНИЯХ">
+
+    <link rel="stylesheet" href="styles-improved.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">ZRT School</div>
+                <div class="promo-banner">
+                    <span class="promo-label">
+                        <svg class="icon-fire" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 23C7.03 23 3 18.97 3 14c0-3.35 1.75-6.28 4.4-8.08.4-.27.95.03.95.52 0 .23-.08.45-.23.62-1.44 1.64-2.32 3.78-2.32 6.14 0 5.08 4.14 9.2 9.2 9.2s9.2-4.12 9.2-9.2c0-2.36-.88-4.5-2.32-6.14-.15-.17-.23-.39-.23-.62 0-.49.55-.79.95-.52C19.25 7.72 21 10.65 21 14c0 4.97-4.03 9-9 9z"/>
+                        </svg>
+                        Акция недели
+                    </span>
+                    <span class="promo-bonus">Бонус 1000 ₽</span>
+                </div>
+                <a href="tel:84996459926" class="header-phone">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                    </svg>
+                    8-499-645-99-26
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="container">
+            <div class="hero-content">
+                <!-- ЗАПОЛНИТЬ: главный экран рекламной страницы -->
+                <h1 class="hero-title">ГЛАВНЫЙ ЗАГОЛОВОК</h1>
+                <p class="hero-subtitle">Подзаголовок: чем эта страница отличается от главной.</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary btn-large" onclick="scrollToForm()">Записаться на тренировку</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ЗАПОЛНИТЬ: секции под задачу страницы.
+         Готовые блоки можно копировать из site/index.html:
+         .features (преимущества), .pricing (цены), .testimonials (отзывы),
+         .photo-gallery (фото), .motorcycles (мототехника). -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">ЗАГОЛОВОК БЛОКА</h2>
+        </div>
+    </section>
+
+    <section class="form-section" id="form">
+        <div class="container">
+            <div class="form-container">
+                <div class="form-header">
+                    <h2>Записаться на тренировку</h2>
+                    <p class="form-subtitle">Оставьте заявку, и менеджер подберет удобные дату и время</p>
+                    <div class="form-bonus">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+                        </svg>
+                        Бонус 1000₽ на первое занятие
+                    </div>
+                </div>
+                
+                <form id="contactForm" onsubmit="handleSubmit(event)" novalidate>
+                    <div class="form-group">
+                        <label for="name">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                            Ваше имя
+                        </label>
+                        <input type="text" id="name" name="name" placeholder="Иван Иванов" required>
+                        <span class="error-message">Пожалуйста, введите ваше имя</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                            </svg>
+                            Телефон
+                        </label>
+                        <input type="tel" id="phone" name="phone" placeholder="+7 (999) 123-45-67" required pattern="[+]?[0-9\s\-()]+">
+                        <span class="error-message">Введите корректный номер телефона</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                            </svg>
+                            Удобный способ связи
+                        </label>
+                        <div class="contact-methods">
+                            <label class="radio-label">
+                                <input type="radio" name="contact_method" value="telegram" checked>
+                                <span class="radio-custom"></span>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+                                </svg>
+                                Telegram
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="contact_method" value="phone">
+                                <span class="radio-custom"></span>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                                </svg>
+                                Позвонить
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="contact_method" value="whatsapp">
+                                <span class="radio-custom"></span>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                                </svg>
+                                WhatsApp
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="bonus" checked>
+                            <span class="checkbox-custom"></span>
+                            <span>Хочу получить бонус 1000₽ на первое занятие</span>
+                        </label>
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="privacy" required>
+                            <span class="checkbox-custom"></span>
+                            <span>Я согласен с <a href="#privacy" onclick="showPrivacy()">политикой конфиденциальности</a></span>
+                        </label>
+                        <span class="error-message">Необходимо согласие с политикой конфиденциальности</span>
+                    </div>
+
+                    <button type="submit" class="submit-button">
+                        <span class="button-text">Отправить заявку</span>
+                        <span class="button-loader"></span>
+                    </button>
+                </form>
+
+                <p class="form-footer">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    </svg>
+                    Ваши данные надежно защищены
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <div class="floating-buttons">
+        <a href="tel:84996459926" class="floating-btn floating-btn-phone" title="Позвонить">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+            </svg>
+        </a>
+        <a href="#" class="floating-btn floating-btn-whatsapp" title="WhatsApp">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+            </svg>
+        </a>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>ZRT School</h4>
+                    <p>Школа мотокросса №1 в Москве</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Контакты</h4>
+                    <p>Телефон: <a href="tel:84996459926">8-499-645-99-26</a></p>
+                    <p>Режим работы: ежедневно 9:00-21:00</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Информация</h4>
+                    <p><a href="#privacy" onclick="showPrivacy()">Политика конфиденциальности</a></p>
+                    <p><a href="#" onclick="showPrivacy()">Публичная оферта</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 ZRT School. Все права защищены.</p>
+                <p class="made-by">Made with ❤️</p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <div class="modal-icon">
+                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+            </div>
+            <h2>Заявка успешно отправлена!</h2>
+            <p>Наш менеджер свяжется с вами в ближайшее время для уточнения деталей.</p>
+            <button class="btn btn-primary" onclick="closeModal()">Отлично</button>
+        </div>
+    </div>
+
+    <script src="script-improved.js"></script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Черновики страниц из pull request'ов — не для поиска.
+Disallow: /_preview/
