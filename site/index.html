@@ -1,1079 +1,427 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Мотокросс в Москве - ZRT School | Тренировки по мотокроссу</title>
-    <meta name="description" content="Школа мотокросса ZRT в Москве. Тренировки для начинающих и профессионалов. Акция: бонус 1000₽ на первое занятие!">
-    <link rel="stylesheet" href="styles-improved.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Первое занятие по мотокроссу в ZRT: экипировка, мотоцикл и тренер включены. Скидка 1000 ₽ на первый заезд.">
+  <meta name="theme-color" content="#111111">
+  <title>ZRT — первый заезд по мотокроссу</title>
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
 </head>
-<body>
-    <!-- Header Section -->
-    <header class="header">
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">ZRT School</div>
-                <div class="promo-banner">
-                    <span class="promo-label">
-                        <svg class="icon-fire" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 23C7.03 23 3 18.97 3 14c0-3.35 1.75-6.28 4.4-8.08.4-.27.95.03.95.52 0 .23-.08.45-.23.62-1.44 1.64-2.32 3.78-2.32 6.14 0 5.08 4.14 9.2 9.2 9.2s9.2-4.12 9.2-9.2c0-2.36-.88-4.5-2.32-6.14-.15-.17-.23-.39-.23-.62 0-.49.55-.79.95-.52C19.25 7.72 21 10.65 21 14c0 4.97-4.03 9-9 9z"/>
-                        </svg>
-                        Акция недели
-                    </span>
-                    <span class="promo-bonus">Бонус 1000 ₽</span>
+<body data-scenario="beginner">
+  <a class="skip-link" href="#scenario">К основному содержимому</a>
+
+  <header class="site-header" aria-label="Главная навигация">
+    <a class="logo" href="#top" aria-label="ZRT School — наверх">
+      <img class="logo__image" src="assets/zrt-logo.png" alt="">
+    </a>
+    <div class="site-header__meta">
+      <span>Москва · Брёхово</span>
+      <a href="tel:+74996459926">+7 499 645-99-26</a>
+      <a class="header-reviews-link" href="#reviews"><i aria-hidden="true"></i>Что говорят после заезда</a>
+    </div>
+    <a class="header-cta" href="#booking">Записаться <span aria-hidden="true">↘</span></a>
+    <a class="header-reviews-mobile" href="#reviews"><i aria-hidden="true"></i>Что говорят после заезда <span aria-hidden="true">↓</span></a>
+  </header>
+
+  <main>
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero__media" aria-hidden="true"></div>
+      <div class="hero__shade" aria-hidden="true"></div>
+      <div class="hero__rail" aria-hidden="true">
+        <span>01</span>
+        <span>ZRT / ТВОЙ ЗАЕЗД</span>
+      </div>
+      <div class="hero__content container">
+        <p class="eyebrow eyebrow--light"><span></span> Школа мотокросса и эндуро · с 4 лет</p>
+        <h1 id="hero-title">Раз зашёл снова —<br><em>значит зацепило</em></h1>
+        <p class="hero__lead">Обычно так откладывают спортзал, английский и отпуск.<br>Но это всего один заезд.</p>
+
+        <div class="hero__choice" aria-label="Выберите свой опыт">
+          <button class="choice-button choice-button--beginner is-active" type="button" data-scenario-select="beginner" aria-pressed="true">
+            <span class="choice-button__dot"></span>
+            Я новичок
+            <span aria-hidden="true">↘</span>
+          </button>
+          <button class="choice-button choice-button--experienced" type="button" data-scenario-select="experienced" aria-pressed="false">
+            <span class="choice-button__dot"></span>
+            Я уже катал
+            <span aria-hidden="true">↘</span>
+          </button>
+        </div>
+
+        <p class="hero__discount"><span>−1000 ₽</span> Скидка на первое занятие никуда не делась</p>
+      </div>
+      <a class="hero__scroll" href="#scenario"><span></span> Листай к своему сценарию</a>
+    </section>
+
+    <section class="scenario section" id="scenario" aria-label="Сценарий тренировки">
+      <div class="container">
+        <div class="section-topline">
+          <p class="section-index">02 / ВЫБЕРИ СВОЙ ТЕМП</p>
+          <div class="scenario-tabs" aria-label="Переключить сценарий">
+            <button type="button" data-scenario-select="beginner" class="is-active" aria-pressed="true">Новичок</button>
+            <button type="button" data-scenario-select="experienced" aria-pressed="false">Уже катал</button>
+          </div>
+        </div>
+
+        <div class="scenario__layout">
+          <div class="scenario__copy">
+            <div data-variant="beginner">
+              <p class="eyebrow"><span></span> Начнём спокойно</p>
+              <h2>Ни разу не ездил?<br><em>Отлично</em></h2>
+              <div class="scenario__text">
+                <p><strong>80% приходят впервые.</strong><br>Без опыта. Без понимания, как вообще тронуться. Главное условие — уметь кататься на велике.</p>
+                <p>Мы всё показываем с нуля. Инструктор рядом. Спокойно. Без гонки.</p>
+                <p class="scenario__result">Через 20–30 минут ты уже едешь сам.</p>
+              </div>
+              <a class="button button--accent" href="#booking">Хочу первый заезд <span aria-hidden="true">↗</span></a>
+              <p class="button-note">Без опыта — это ок</p>
+            </div>
+
+            <div data-variant="experienced" hidden>
+              <p class="eyebrow"><span></span> Добавим темпа</p>
+              <h2>Раз ты в теме —<br><em>знаешь, что цепляет</em></h2>
+              <div class="scenario__text">
+                <p><strong>Мы не будем гонять тебя по кругу «для галочки».</strong></p>
+                <p>Подберём технику мощнее, разберём ошибки, добавим скорости и контроля.</p>
+                <p class="scenario__result">Не «покататься кружочек». Выйти на уровень выше.</p>
+              </div>
+              <a class="button button--accent" href="#booking">Прокачать уровень <span aria-hidden="true">↗</span></a>
+              <p class="button-note">Гарантировано интересно</p>
+            </div>
+          </div>
+
+          <div class="scenario__visual">
+            <figure class="scenario-photo scenario-photo--beginner" data-variant="beginner">
+              <img src="assets/beginner-rider.jpg" alt="Ученица ZRT на синем кроссовом мотоцикле">
+              <figcaption><span>01</span> Первый заезд · всё под контролем</figcaption>
+            </figure>
+            <figure class="scenario-photo scenario-photo--experienced" data-variant="experienced" hidden>
+              <img src="assets/experienced-rider.jpg" alt="Опытный райдер ZRT проходит поворот на трассе">
+              <figcaption><span>02</span> Больше темпа · точнее техника</figcaption>
+            </figure>
+            <div class="scenario-stamp" aria-hidden="true">3 ГА<br><small>ТРАСС</small></div>
+          </div>
+        </div>
+
+        <div class="trigger-row" data-variant="beginner">
+          <p><span>01</span> Всё снаряжение выдаём</p>
+          <p><span>02</span> Мотоцикл под твой рост</p>
+          <p><span>03</span> Безопасно и без стресса</p>
+        </div>
+        <div class="trigger-row" data-variant="experienced" hidden>
+          <p><span>01</span> Разная мощность</p>
+          <p><span>02</span> Тренер под твой уровень</p>
+          <p><span>03</span> Настоящая трасса</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="training section section--dark" id="training" aria-label="Как проходит тренировка">
+      <div class="training__ghost" aria-hidden="true">RIDE</div>
+      <div class="container">
+        <div class="section-topline section-topline--dark">
+          <p class="section-index">03 / КАК ВСЁ ПРОХОДИТ</p>
+          <p class="section-caption" data-variant="beginner">Без суеты. Шаг за шагом.</p>
+          <p class="section-caption" data-variant="experienced" hidden>Без скучных кругов.</p>
+        </div>
+
+        <div data-variant="beginner">
+          <h2>Первое занятие.<br><em>Четыре простых шага</em></h2>
+          <ol class="steps">
+            <li><span>01</span><p>Приезжаешь —<br><strong>выдаём экипировку</strong></p></li>
+            <li><span>02</span><p>Объясняем базу:<br><strong>стойка, газ, торможение</strong></p></li>
+            <li><span>03</span><p>Первый аккуратный<br><strong>заезд с тренером</strong></p></li>
+            <li><span>04</span><p>Через 20–30 минут<br><strong>уже едешь сам</strong></p></li>
+          </ol>
+          <div class="training__footer">
+            <p>Ты не обязан быть готовым.<br><strong>Мы всё разложим по шагам.</strong></p>
+            <a class="button button--accent" href="#booking">Хочу первый заезд <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+
+        <div data-variant="experienced" hidden>
+          <h2>Тренировка для тех,<br><em>кто уже в теме</em></h2>
+          <ol class="steps">
+            <li><span>01</span><p>Подбираем мотоцикл<br><strong>под уровень и задачи</strong></p></li>
+            <li><span>02</span><p>Делаем короткий<br><strong>разбор техники</strong></p></li>
+            <li><span>03</span><p>Работаем над стойкой,<br><strong>поворотами, контролем</strong></p></li>
+            <li><span>04</span><p>Добавляем темп<br><strong>и уверенность</strong></p></li>
+          </ol>
+          <div class="training__footer">
+            <p>Не «кружочек покататься».<br><strong>Это реально прокачка.</strong></p>
+            <div>
+              <a class="button button--accent" href="#booking">Вкатиться на уровень <span aria-hidden="true">↗</span></a>
+              <p class="button-note button-note--dark">Гарантировано интересно</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="motopark section" id="motopark" aria-labelledby="motopark-title">
+      <div class="container">
+        <div class="section-topline">
+          <p class="section-index">04 / МОТОПАРК</p>
+          <p class="section-caption">Япония · Европа · Китай</p>
+        </div>
+        <div class="motopark__intro">
+          <h2 id="motopark-title">Вот на чём<br><em>ты поедешь</em></h2>
+          <p>Подбираем мотоцикл под твой рост и уровень.<br>Новичку — лёгкий и понятный.<br>Опытному — бодрый и живой.</p>
+        </div>
+      </div>
+
+      <div class="bike-gallery" aria-label="Фотографии мотопарка">
+        <figure class="bike-gallery__item bike-gallery__item--wide">
+          <img src="assets/three-riders.jpg" alt="Три райдера рядом с мотоциклами ZRT">
+          <figcaption><span>Для любого уровня</span><b>50–300 см³</b></figcaption>
+        </figure>
+        <figure class="bike-gallery__item">
+          <img src="assets/two-riders.jpg" alt="Два райдера на кроссовых мотоциклах">
+          <figcaption><span>Под рост</span><b>от 4 лет</b></figcaption>
+        </figure>
+        <figure class="bike-gallery__item">
+          <img src="assets/riders-lineup.jpg" alt="Райдеры и мотоциклы на летней трассе">
+          <figcaption><span>Под задачу</span><b>15+ байков</b></figcaption>
+        </figure>
+      </div>
+
+      <div class="container motopark__cta">
+        <p><strong>Мотоцикл, экипировка и тренер</strong><br>уже входят в занятие.</p>
+        <a class="button button--dark" href="#booking">Он тебя уже ждёт <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+
+    <section class="reviews section" id="reviews" aria-label="Отзывы учеников ZRT">
+      <div class="container">
+        <div class="section-topline">
+          <p class="section-index">05 / ГОВОРЯТ ПОСЛЕ ЗАЕЗДА</p>
+          <p class="section-caption">Реальные отзывы · Яндекс Карты</p>
+        </div>
+        <div class="reviews-live">
+          <div class="reviews-live__copy">
+            <div data-variant="beginner">
+              <p class="eyebrow"><span></span> Проверено на трассе</p>
+              <h2>Страшно было только<br><em>до первого поворота</em></h2>
+            </div>
+            <div data-variant="experienced" hidden>
+              <p class="eyebrow"><span></span> Проверено на трассе</p>
+              <h2>Скучно не было<br><em>ни одного круга</em></h2>
+            </div>
+
+            <p class="reviews-live__lead">Реальные слова тех, кто уже выбрал<br>свою траекторию и вышел на старт.</p>
+            <p class="reviews-live__rating"><strong>5,0</strong><span aria-label="Пять звёзд">★★★★★</span><small>739 отзывов</small></p>
+            <a class="reviews-live__link" href="https://yandex.kz/maps/org/zrt/1799711696/" target="_blank" rel="noopener noreferrer">
+              Все отзывы на Яндексе <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+
+          <div class="reviews-live__widget-shell">
+            <span class="reviews-live__tag" data-variant="beginner">Первый заезд</span>
+            <span class="reviews-live__tag" data-variant="experienced" hidden>Новый уровень</span>
+            <div class="reviews-live__widget">
+              <article class="yandex-review" data-variant="beginner" aria-label="Отзыв Елены на Яндекс Картах">
+                <header class="yandex-review__header">
+                  <strong>Zrt</strong>
+                  <span><b>Я</b> Яндекс Карты</span>
+                </header>
+                <div class="yandex-review__score">
+                  <strong>5,0</strong>
+                  <span aria-label="Пять звёзд">★★★★★</span>
+                  <small>739 отзывов · 1367 оценок</small>
                 </div>
-                <a href="tel:84996459926" class="header-phone">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                    </svg>
-                    8-499-645-99-26
+                <div class="yandex-review__person">
+                  <span class="yandex-review__avatar" aria-hidden="true">Е</span>
+                  <p><strong>Елена</strong><small>1 июня</small></p>
+                </div>
+                <div class="yandex-review__stars" aria-label="Пять звёзд">★★★★★</div>
+                <blockquote>«Тренер приятный, всё чётко объяснил, показал, а потом поддерживал»</blockquote>
+                <p class="yandex-review__note">Первое занятие · экипировка · тренер рядом</p>
+                <a class="yandex-review__source" href="https://yandex.kz/maps/org/zrt/1799711696/" target="_blank" rel="noopener noreferrer">
+                  Читать отзыв на Яндекс Картах <span aria-hidden="true">↗</span>
                 </a>
-            </div>
-        </div>
-    </header>
+              </article>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-overlay"></div>
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-badge">
-                    Для взрослых новичков • всё включено • Москва
+              <article class="yandex-review" data-variant="experienced" hidden aria-label="Отзыв Павла на Яндекс Картах">
+                <header class="yandex-review__header">
+                  <strong>Zrt</strong>
+                  <span><b>Я</b> Яндекс Карты</span>
+                </header>
+                <div class="yandex-review__score">
+                  <strong>5,0</strong>
+                  <span aria-label="Пять звёзд">★★★★★</span>
+                  <small>739 отзывов · 1367 оценок</small>
                 </div>
-                <h1 class="hero-title">
-                    Первая тренировка по мотокроссу в Москве — безопасно и с нуля
-                </h1>
-                <p class="hero-subtitle">90 минут на треке с тренером рядом. Мотоцикл и экипировка включены.</p>
-                <p class="hero-description">
-                    Подходит, если ты никогда не ездил. Начинаем с базовых упражнений без "геройства".
-                </p>
-                <div class="hero-price">
-                    <span class="price-amount">от 5 500 до 8 000 ₽</span>
-                    <span class="price-note">за занятие (всё включено)</span>
+                <div class="yandex-review__person">
+                  <span class="yandex-review__avatar" aria-hidden="true">П</span>
+                  <p><strong>Павел С.</strong><small>7 июля</small></p>
                 </div>
-                <div class="hero-buttons">
-                    <button class="btn btn-primary" onclick="scrollToForm()">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M3 3h18v18H3zM12 8v8m-4-4h8"/>
-                        </svg>
-                        Записаться на первое занятие
-                    </button>
-                    <button class="btn btn-secondary" onclick="scrollToSection('features')">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
-                        </svg>
-                        Что входит в занятие
-                    </button>
-                </div>
-                <p class="hero-cta-note">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
-                    </svg>
-                    Ответим за 2–5 минут • Подберём время • Без звонков, можно в WhatsApp/Telegram
-                </p>
-                <div class="hero-features">
-                    <div class="hero-feature">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M9 11l3 3L22 4"></path>
-                            <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"></path>
-                        </svg>
-                        Без прав категории А
-                    </div>
-                    <div class="hero-feature">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                        </svg>
-                        Экипировка и защита включены
-                    </div>
-                    <div class="hero-feature">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
-                            <circle cx="12" cy="7" r="4"></circle>
-                        </svg>
-                        Тренер рядом всё занятие
-                    </div>
-                </div>
+                <div class="yandex-review__stars" aria-label="Пять звёзд">★★★★★</div>
+                <blockquote>«Хожу уже месяц, результат после каждой тренировки. Квалифицированный тренер, хорошие мотоциклы»</blockquote>
+                <p class="yandex-review__note">Регулярные тренировки · заметный прогресс</p>
+                <a class="yandex-review__source" href="https://yandex.kz/maps/org/zrt/1799711696/" target="_blank" rel="noopener noreferrer">
+                  Читать отзыв на Яндекс Картах <span aria-hidden="true">↗</span>
+                </a>
+              </article>
             </div>
+          </div>
         </div>
-        <div class="scroll-indicator" onclick="scrollToSection('features')">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 5v14M19 12l-7 7-7-7"/>
-            </svg>
-        </div>
+      </div>
     </section>
 
-    <!-- Stats Section -->
-    <section class="stats-section">
-        <div class="container">
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <div class="stat-number" data-target="30000">0</div>
-                    <div class="stat-label">Учеников обучено</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number" data-target="15">0</div>
-                    <div class="stat-label">Лет опыта</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number" data-target="9">0</div>
-                    <div class="stat-label">Мотоциклов в парке</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number" data-target="98">0</div>
-                    <div class="stat-label">% довольных клиентов</div>
-                </div>
-            </div>
+    <section class="booking section section--dark" id="booking" aria-label="Запись на тренировку">
+      <div class="booking__media" aria-hidden="true"></div>
+      <div class="booking__shade" aria-hidden="true"></div>
+      <div class="container booking__layout">
+        <div class="booking__copy">
+          <p class="eyebrow eyebrow--light"><span></span> Остался один шаг</p>
+
+          <div data-variant="beginner">
+            <h2>Первый раз —<br><em>самый запоминающийся</em></h2>
+            <p class="booking__lead">Ты не обязан быть профи.<br>Нужно просто приехать.</p>
+          </div>
+          <div data-variant="experienced" hidden>
+            <h2>Пора вкатиться<br><em>на следующий уровень</em></h2>
+            <p class="booking__lead">Добавим темпа, разберём технику<br>и выжмем из тебя больше, чем ты думаешь.</p>
+          </div>
+
+          <div class="booking__benefits" data-variant="beginner">
+            <p><span>✓</span> Никакой подготовки не нужно</p>
+            <p><span>✓</span> Всё выдаём и ведём с самого начала</p>
+            <p><span>✓</span> Первый заезд контролирует тренер</p>
+          </div>
+          <div class="booking__benefits" data-variant="experienced" hidden>
+            <p><span>✓</span> Мотоциклы разной мощности</p>
+            <p><span>✓</span> Скорость, техника и контроль</p>
+            <p><span>✓</span> Треки площадью 3 га</p>
+          </div>
         </div>
+
+        <form class="booking-form" id="contactForm" novalidate>
+          <div class="booking-form__top">
+            <p>Запись на тренировку</p>
+            <span>−1000 ₽</span>
+          </div>
+          <label>
+            <span>Ваше имя</span>
+            <input type="text" name="name" autocomplete="name" placeholder="Как к вам обращаться" required>
+            <small class="field-error">Введите имя</small>
+          </label>
+          <label>
+            <span>Телефон</span>
+            <input type="tel" name="phone" autocomplete="tel" inputmode="tel" placeholder="+7 999 000-00-00" required>
+            <small class="field-error">Введите корректный номер</small>
+          </label>
+          <fieldset>
+            <legend>Как с вами связаться?</legend>
+            <div class="contact-options">
+              <label class="contact-option">
+                <input type="radio" name="contact" value="telegram" checked>
+                <span><b aria-hidden="true">↗</b> Telegram</span>
+              </label>
+              <label class="contact-option">
+                <input type="radio" name="contact" value="whatsapp">
+                <span><b aria-hidden="true">☎</b> WhatsApp</span>
+              </label>
+              <label class="contact-option">
+                <input type="radio" name="contact" value="max">
+                <span><b class="max-icon" aria-hidden="true">M</b> MAX</span>
+              </label>
+              <label class="contact-option">
+                <input type="radio" name="contact" value="phone">
+                <span><b aria-hidden="true">●</b> Звонок</span>
+              </label>
+            </div>
+          </fieldset>
+          <p class="booking-form__discount"><strong>Скидка 1000 ₽ закреплена.</strong><br>Менеджер уточнит удобные дату и время.</p>
+          <button class="button button--accent button--submit" type="submit">
+            <span data-variant="beginner">Забронировать лучший выходной</span>
+            <span data-variant="experienced" hidden>Прокачать уровень</span>
+            <i aria-hidden="true">↗</i>
+          </button>
+          <label class="privacy">
+            <input type="checkbox" name="privacy" required checked>
+            <span>Я согласен с <a href="privacy.html" target="_blank" rel="noopener noreferrer">политикой конфиденциальности</a></span>
+          </label>
+          <div class="form-success" id="successModal" role="status" aria-live="polite" hidden>
+            <strong>Готово. Первый шаг сделан!</strong>
+            <span>Свяжемся с вами и подберём удобное время.</span>
+          </div>
+        </form>
+      </div>
     </section>
 
-    <!-- Features Section -->
-    <section class="features" id="features">
-        <div class="container">
-            <h2 class="section-title">Почему выбирают нас</h2>
-            <p class="section-subtitle">Всё, что нужно для комфортной и безопасной тренировки</p>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
-                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
-                        </svg>
-                    </div>
-                    <h3>Всё «под ключ»</h3>
-                    <p>Экипировка, мотоцикл, тренер, раздевалка с душем, кафе и зона отдыха. Вам нужно только приехать!</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                        </svg>
-                    </div>
-                    <h3>Безопасность</h3>
-                    <p>Опытный тренер, полная защита и ежедневный техосмотр мотоциклов. Ваша безопасность — наш приоритет</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                            <polyline points="14 2 14 8 20 8"></polyline>
-                            <line x1="16" y1="13" x2="8" y2="13"></line>
-                            <line x1="16" y1="17" x2="8" y2="17"></line>
-                            <polyline points="10 9 9 9 8 9"></polyline>
-                        </svg>
-                    </div>
-                    <h3>Без прав категории «А»</h3>
-                    <p>Кроссовый мотоцикл — спортивный инвентарь. Водительские права не требуются</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-                        </svg>
-                    </div>
-                    <h3>Опыт не важен</h3>
-                    <p>Даже если вы никогда не сидели на мотоцикле — вы проедете трассу уже на первой тренировке</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <polyline points="12 6 12 12 16 14"></polyline>
-                        </svg>
-                    </div>
-                    <h3>Удобное время</h3>
-                    <p>Занятия в будни и выходные с 9:00 до 21:00. Выберите комфортное для вас время</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                        </svg>
-                    </div>
-                    <h3>Гарантируем удовольствие</h3>
-                    <p>Море эмоций, заряд энергии и драйва. Вы получите незабываемые впечатления!</p>
-                </div>
-            </div>
+    <section class="location section" id="location" aria-label="Карта проезда к ZRT">
+      <div class="container">
+        <div class="section-topline">
+          <p class="section-index">07 / ТОЧКА СТАРТА</p>
+          <p class="section-caption">ZRT · КУТУЗОВСКИЙ РЕДУТ</p>
         </div>
-    </section>
-
-    <!-- Photo Gallery Section -->
-    <section class="photo-gallery">
-        <div class="container">
-            <h2 class="section-title">Галерея</h2>
-            <p class="section-subtitle">Фотографии с наших тренировок</p>
-            <div class="gallery-grid">
-                <div class="gallery-item" data-src="https://static.tildacdn.com/tild6533-3238-4234-b366-303935383035/IMG_4446.jpg">
-                    <img src="https://static.tildacdn.com/tild6533-3238-4234-b366-303935383035/IMG_4446.jpg" alt="Тренировка по мотокроссу" loading="lazy">
-                    <div class="gallery-overlay">
-                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                            <circle cx="12" cy="12" r="3"></circle>
-                        </svg>
-                    </div>
-                </div>
-                <div class="gallery-item" data-src="https://static.tildacdn.com/tild3161-6639-4239-b733-353762613835/IMG_1709.jpg">
-                    <img src="https://static.tildacdn.com/tild3161-6639-4239-b733-353762613835/IMG_1709.jpg" alt="Зимний мотокросс" loading="lazy">
-                    <div class="gallery-overlay">
-                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                            <circle cx="12" cy="12" r="3"></circle>
-                        </svg>
-                    </div>
-                </div>
-                <div class="gallery-item" data-src="https://static.tildacdn.com/tild3565-3738-4461-b765-323835353235/IMG_4445.jpg">
-                    <img src="https://static.tildacdn.com/tild3565-3738-4461-b765-323835353235/IMG_4445.jpg" alt="Гонки на мотоциклах" loading="lazy">
-                    <div class="gallery-overlay">
-                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                            <circle cx="12" cy="12" r="3"></circle>
-                        </svg>
-                    </div>
-                </div>
-                <div class="gallery-item" data-src="https://static.tildacdn.com/tild6639-3736-4237-b337-303964656337/IMG_4427.jpg">
-                    <img src="https://static.tildacdn.com/tild6639-3736-4237-b337-303964656337/IMG_4427.jpg" alt="Детский мотокросс" loading="lazy">
-                    <div class="gallery-overlay">
-                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                            <circle cx="12" cy="12" r="3"></circle>
-                        </svg>
-                    </div>
-                </div>
-                <div class="gallery-item" data-src="https://static.tildacdn.com/tild3839-3031-4664-b862-326335393938/IMG_3918.jpg">
-                    <img src="https://static.tildacdn.com/tild3839-3031-4664-b862-326335393938/IMG_3918.jpg" alt="Эндуро тренировка" loading="lazy">
-                    <div class="gallery-overlay">
-                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                            <circle cx="12" cy="12" r="3"></circle>
-                        </svg>
-                    </div>
-                </div>
-                <div class="gallery-item" data-src="https://static.tildacdn.com/tild3030-3562-4439-a536-343032623932/IMG_3919.jpg">
-                    <img src="https://static.tildacdn.com/tild3030-3562-4439-a536-343032623932/IMG_3919.jpg" alt="Трюки на мотоцикле" loading="lazy">
-                    <div class="gallery-overlay">
-                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                            <circle cx="12" cy="12" r="3"></circle>
-                        </svg>
-                    </div>
-                </div>
-            </div>
+        <div class="location__layout">
+          <div class="location__copy">
+            <p class="eyebrow eyebrow--light"><span></span> Маршрут к заезду</p>
+            <h2>Точка старта —<br><em><span class="location__wide-word">Кутузовский</span><br>редут</em></h2>
+            <p class="location__lead">Открой маршрут в Яндекс Картах<br>и приезжай к своему времени.</p>
+            <a class="button button--accent" href="https://yandex.ru/maps/?rtext=~55.9361048%2C37.1908552&amp;rtt=auto" target="_blank" rel="noopener noreferrer">
+              Построить маршрут <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+          <div class="location__map">
+            <iframe
+              title="ZRT Кутузовский редут на Яндекс Картах"
+              src="https://yandex.ru/map-widget/v1/?ll=37.1908552%2C55.9361048&amp;pt=37.1908552%2C55.9361048%2Cpm2rdm&amp;z=16"
+              loading="lazy"
+              allowfullscreen
+            ></iframe>
+            <span class="location__badge">ZRT · КУТУЗОВСКИЙ РЕДУТ</span>
+          </div>
         </div>
+      </div>
     </section>
+  </main>
 
-    <!-- Lightbox -->
-    <div id="lightbox" class="lightbox">
-        <button class="lightbox-close" onclick="closeLightbox()">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <line x1="18" y1="6" x2="6" y2="18"></line>
-                <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-        </button>
-        <button class="lightbox-prev" onclick="changeLightboxImage(-1)">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="15 18 9 12 15 6"></polyline>
-            </svg>
-        </button>
-        <img id="lightbox-img" src="" alt="">
-        <button class="lightbox-next" onclick="changeLightboxImage(1)">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="9 18 15 12 9 6"></polyline>
-            </svg>
-        </button>
+  <footer class="site-footer">
+    <div class="container footer-main">
+      <a class="logo logo--footer" href="#top" aria-label="ZRT School — наверх">
+        <img class="logo__image" src="assets/zrt-logo.png" alt="">
+      </a>
+      <p class="footer-slogan">Стартуй. Газуй. Кайфуй.</p>
+      <div class="footer-contact">
+        <a href="tel:+74996459926">+7 499 645-99-26</a>
+        <span>Москва, д. Брёхово</span>
+      </div>
     </div>
-
-    <!-- Target Audience Section -->
-    <section class="target-audience">
-        <div class="container">
-            <h2 class="section-title">Для кого наши тренировки</h2>
-            <div class="audience-grid">
-                <div class="audience-card">
-                    <div class="audience-icon">
-                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
-                        </svg>
-                    </div>
-                    <h4>Любите активный отдых</h4>
-                </div>
-                <div class="audience-card">
-                    <div class="audience-icon">
-                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M17 18a5 5 0 0 0-10 0"></path>
-                            <line x1="12" y1="9" x2="12" y2="2"></line>
-                            <line x1="4.22" y1="10.22" x2="5.64" y2="11.64"></line>
-                            <line x1="1" y1="18" x2="3" y2="18"></line>
-                            <line x1="21" y1="18" x2="23" y2="18"></line>
-                            <line x1="18.36" y1="11.64" x2="19.78" y2="10.22"></line>
-                            <line x1="23" y1="22" x2="1" y2="22"></line>
-                            <path d="M16 5a4 4 0 0 0-8 0"></path>
-                        </svg>
-                    </div>
-                    <h4>Любите экстрим и адреналин</h4>
-                </div>
-                <div class="audience-card">
-                    <div class="audience-icon">
-                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
-                            <line x1="9" y1="9" x2="9.01" y2="9"></line>
-                            <line x1="15" y1="9" x2="15.01" y2="9"></line>
-                        </svg>
-                    </div>
-                    <h4>Хотите избавиться от стресса</h4>
-                </div>
-                <div class="audience-card">
-                    <div class="audience-icon">
-                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <line x1="12" y1="20" x2="12" y2="10"></line>
-                            <line x1="18" y1="20" x2="18" y2="4"></line>
-                            <line x1="6" y1="20" x2="6" y2="16"></line>
-                        </svg>
-                    </div>
-                    <h4>Хотите прокачать навыки</h4>
-                </div>
-                <div class="audience-card">
-                    <div class="audience-icon">
-                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                            <circle cx="9" cy="7" r="4"></circle>
-                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                        </svg>
-                    </div>
-                    <h4>Хотите познакомиться с новыми людьми</h4>
-                </div>
-                <div class="audience-card">
-                    <div class="audience-icon">
-                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-                        </svg>
-                    </div>
-                    <h4>Хотите новых впечатлений</h4>
-                </div>
-            </div>
-            <div class="section-cta">
-                <button class="btn btn-primary" onclick="scrollToForm()">Записаться на тренировку</button>
-                <button class="btn btn-outline" onclick="scrollToSection('contact')">Подарить сертификат</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Motorcycles Section -->
-    <section class="motorcycles" id="motorcycles">
-        <div class="container">
-            <h2 class="section-title">Наш мотопарк</h2>
-            <p class="section-subtitle">Японская мототехника с ежедневным техосмотром</p>
-            
-            <div class="moto-carousel">
-                <button class="carousel-btn prev" onclick="moveCarousel(-1)" aria-label="Предыдущий мотоцикл">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="15 18 9 12 15 6"></polyline>
-                    </svg>
-                </button>
-                <div class="moto-carousel-container">
-                    <div class="moto-slide active">
-                        <div class="moto-card-horizontal">
-                            <div class="moto-info">
-                                <span class="moto-badge">Для детей</span>
-                                <h3>Kawasaki KX 85</h3>
-                                <p class="moto-subtitle">Серьезный аппарат для юных гонщиков</p>
-                                <p class="moto-age">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                                        <circle cx="12" cy="7" r="4"></circle>
-                                    </svg>
-                                    Для детей от 10 до 13 лет
-                                </p>
-                                <p class="moto-description">Близок к полноразмерным кроссовым мотоциклам. Мощность и легкость по сравнению с похожими моделями.</p>
-                                <div class="moto-specs">
-                                    <div class="spec-item">
-                                        <span class="spec-label">Объем</span>
-                                        <span class="spec-value">85cc</span>
-                                    </div>
-                                    <div class="spec-item">
-                                        <span class="spec-label">Тип</span>
-                                        <span class="spec-value">2-тактный</span>
-                                    </div>
-                                </div>
-                                <button class="btn btn-primary" onclick="scrollToForm()">Записаться</button>
-                            </div>
-                            <div class="moto-image">
-                                <img src="https://static.tildacdn.com/tild3830-3964-4736-a433-666532613537/kawasaki-kx85-2021-v.png" alt="Kawasaki KX 85" loading="lazy">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="moto-slide">
-                        <div class="moto-card-horizontal">
-                            <div class="moto-info">
-                                <span class="moto-badge">Начальный уровень</span>
-                                <h3>Yamaha TTR 125</h3>
-                                <p class="moto-subtitle">Первые шаги в мотокроссе</p>
-                                <p class="moto-age">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                                        <circle cx="12" cy="7" r="4"></circle>
-                                    </svg>
-                                    Для детей от 10 лет и миниатюрных девушек
-                                </p>
-                                <p class="moto-description">Лучшая управляемость в классе мотоциклов 125cc 2т. Идеален для начинающих.</p>
-                                <div class="moto-specs">
-                                    <div class="spec-item">
-                                        <span class="spec-label">Объем</span>
-                                        <span class="spec-value">125cc</span>
-                                    </div>
-                                    <div class="spec-item">
-                                        <span class="spec-label">Тип</span>
-                                        <span class="spec-value">2-тактный</span>
-                                    </div>
-                                </div>
-                                <button class="btn btn-primary" onclick="scrollToForm()">Записаться</button>
-                            </div>
-                            <div class="moto-image">
-                                <img src="https://static.tildacdn.com/tild6236-6439-4562-a332-346632333864/yamaha-ttr125-2019-v.png" alt="Yamaha TTR 125" loading="lazy">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="moto-slide">
-                        <div class="moto-card-horizontal">
-                            <div class="moto-info">
-                                <span class="moto-badge">Популярный</span>
-                                <h3>YAMAHA YZ 125</h3>
-                                <p class="moto-subtitle">Проверенная классика</p>
-                                <p class="moto-age">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                                        <circle cx="12" cy="7" r="4"></circle>
-                                    </svg>
-                                    Для детей от 14 лет и взрослых
-                                </p>
-                                <p class="moto-description">Превосходная управляемость и надежность. Идеален для прогрессирования в мотокроссе.</p>
-                                <div class="moto-specs">
-                                    <div class="spec-item">
-                                        <span class="spec-label">Объем</span>
-                                        <span class="spec-value">125cc</span>
-                                    </div>
-                                    <div class="spec-item">
-                                        <span class="spec-label">Тип</span>
-                                        <span class="spec-value">2-тактный</span>
-                                    </div>
-                                </div>
-                                <button class="btn btn-primary" onclick="scrollToForm()">Записаться</button>
-                            </div>
-                            <div class="moto-image">
-                                <img src="https://static.tildacdn.com/tild3433-3339-4139-a232-656336323331/yamaha-yz125-2020-vi.png" alt="YAMAHA YZ 125" loading="lazy">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="moto-slide">
-                        <div class="moto-card-horizontal">
-                            <div class="moto-info">
-                                <span class="moto-badge">Хит продаж</span>
-                                <h3>KTM SX 125</h3>
-                                <p class="moto-subtitle">Мощь и точность</p>
-                                <p class="moto-age">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                                        <circle cx="12" cy="7" r="4"></circle>
-                                    </svg>
-                                    Для детей от 14 лет и взрослых
-                                </p>
-                                <p class="moto-description">Самая популярная модель для юношей. Эффективные тормоза и мощный мотор.</p>
-                                <div class="moto-specs">
-                                    <div class="spec-item">
-                                        <span class="spec-label">Объем</span>
-                                        <span class="spec-value">125cc</span>
-                                    </div>
-                                    <div class="spec-item">
-                                        <span class="spec-label">Тип</span>
-                                        <span class="spec-value">2-тактный</span>
-                                    </div>
-                                </div>
-                                <button class="btn btn-primary" onclick="scrollToForm()">Записаться</button>
-                            </div>
-                            <div class="moto-image">
-                                <img src="https://static.tildacdn.com/tild3361-6239-4633-a336-343639323539/ktm-sx125-2020-viol.png" alt="KTM SX 125" loading="lazy">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="moto-slide">
-                        <div class="moto-card-horizontal">
-                            <div class="moto-info">
-                                <span class="moto-badge">Для взрослых</span>
-                                <h3>YAMAHA WRF 250</h3>
-                                <p class="moto-subtitle">Универсальный выбор</p>
-                                <p class="moto-age">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                                        <circle cx="12" cy="7" r="4"></circle>
-                                    </svg>
-                                    Для взрослых
-                                </p>
-                                <p class="moto-description">4-тактный с электростартером. Идеален для начального и среднего уровня. Для тех, кто не любит кикстартеры.</p>
-                                <div class="moto-specs">
-                                    <div class="spec-item">
-                                        <span class="spec-label">Объем</span>
-                                        <span class="spec-value">250cc</span>
-                                    </div>
-                                    <div class="spec-item">
-                                        <span class="spec-label">Тип</span>
-                                        <span class="spec-value">4-тактный</span>
-                                    </div>
-                                </div>
-                                <button class="btn btn-primary" onclick="scrollToForm()">Записаться</button>
-                            </div>
-                            <div class="moto-image">
-                                <img src="https://static.tildacdn.com/tild3664-3662-4666-b931-303430656636/yamaha-wrf250-2020-v.png" alt="YAMAHA WRF 250" loading="lazy">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <button class="carousel-btn next" onclick="moveCarousel(1)" aria-label="Следующий мотоцикл">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="9 18 15 12 9 6"></polyline>
-                    </svg>
-                </button>
-            </div>
-            
-            <div class="carousel-dots">
-                <span class="dot active" onclick="currentSlide(0)"></span>
-                <span class="dot" onclick="currentSlide(1)"></span>
-                <span class="dot" onclick="currentSlide(2)"></span>
-                <span class="dot" onclick="currentSlide(3)"></span>
-                <span class="dot" onclick="currentSlide(4)"></span>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section class="testimonials">
-        <div class="container">
-            <h2 class="section-title">Отзывы наших клиентов</h2>
-            <p class="section-subtitle">Более 30 000 довольных учеников</p>
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="testimonial-rating">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                        </svg>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                        </svg>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                        </svg>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                        </svg>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                        </svg>
-                    </div>
-                    <p class="testimonial-text">"Это был мой первый опыт на мотоцикле, тренер Дмитрий очень все подробно объяснял, с минимальным количеством замечаний и нереальными эмоциями я закончила тренировку. Хочу приезжать снова и снова!"</p>
-                    <div class="testimonial-author">
-                        <strong>Арина</strong>
-                        <span>Первое занятие · июль 2025</span>
-                    </div>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="testimonial-rating">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                        </svg>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                        </svg>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                        </svg>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                        </svg>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                        </svg>
-                    </div>
-                    <p class="testimonial-text">"Приехали кататься с дочерью 9 лет. На первом занятии встретили, помогли переодеться, проинструктировали, размяли и она поехала! В конце занятия сказала: 'Еще хочу!!!'. Пойдем еще. Советую."</p>
-                    <div class="testimonial-author">
-                        <strong>Кирилл С.</strong>
-                        <span>С дочерью 9 лет · сентябрь 2025</span>
-                    </div>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="testimonial-rating">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                        </svg>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                        </svg>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                        </svg>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                        </svg>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                        </svg>
-                    </div>
-                    <p class="testimonial-text">"Абсолютно кайф! Мотоцикл выдали обслуженный, полный экип, главное - тренер Артем - 5/5 звезд. Подобрал маршрут подходящей сложности, по дороге помогал советами и физически. Буду приезжать еще!"</p>
-                    <div class="testimonial-author">
-                        <strong>Кирилл Андрияшин</strong>
-                        <span>Эндуро · июль 2025</span>
-                    </div>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="testimonial-rating">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                        </svg>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                        </svg>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                        </svg>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                        </svg>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                        </svg>
-                    </div>
-                    <p class="testimonial-text">"Очень рекомендую данную школу, сервис на высоте, особо рекомендую инструктора Артема Брунцева - настоящий профессионал, педагог от Бога. Даже если вы никогда в глаза не видели мотоцикл, поедете на первом же занятии!"</p>
-                    <div class="testimonial-author">
-                        <strong>Виктория Попова</strong>
-                        <span>Постоянный клиент · январь 2025</span>
-                    </div>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="testimonial-rating">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                        </svg>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                        </svg>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                        </svg>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                        </svg>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                        </svg>
-                    </div>
-                    <p class="testimonial-text">"Подарила близнецам тренировку на день рождения и не пожалела! Отличная атмосфера! За одно занятие дети научились заводить байк, не глохнуть и уже катались по полноценной трассе. Большое спасибо тренеру!"</p>
-                    <div class="testimonial-author">
-                        <strong>Анастасия Юшина</strong>
-                        <span>Подарок близнецам · март 2025</span>
-                    </div>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="testimonial-rating">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                        </svg>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                        </svg>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                        </svg>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                        </svg>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                        </svg>
-                    </div>
-                    <p class="testimonial-text">"Получил в подарок сертификат. На мотоцикле перед занятием сидел только в мечтах. Всё очень понравилось, выдали полный комплект экипировки, инструктор всё объяснил, подсказал, корректировал. Буду приезжать еще!"</p>
-                    <div class="testimonial-author">
-                        <strong>Александр Щербаков</strong>
-                        <span>Сертификат в подарок · апрель 2025</span>
-                    </div>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="testimonial-rating">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                        </svg>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                        </svg>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                        </svg>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                        </svg>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                        </svg>
-                    </div>
-                    <p class="testimonial-text">"Тренера настоящие профессионалы, сотрудники обеспечили качественную обратную связь. Большой выбор расписания. На меня быстро подобрали комплект защиты вместе с джерси и штанами. Мотоциклы ухоженные!"</p>
-                    <div class="testimonial-author">
-                        <strong>Артём</strong>
-                        <span>Регулярные тренировки · ноябрь 2025</span>
-                    </div>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="testimonial-rating">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                        </svg>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                        </svg>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                        </svg>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                        </svg>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                        </svg>
-                    </div>
-                    <p class="testimonial-text">"Месяц назад возобновила тренировки после перерыва - и теперь не представляю жизни без мотоцикла! Думала, что буду кататься раз в неделю, но благодаря атмосфере катаюсь теперь почти каждый день. Мотошколе - огромное спасибо!"</p>
-                    <div class="testimonial-author">
-                        <strong>Анастасия</strong>
-                        <span>Постоянный клиент · август 2025</span>
-                    </div>
-                </div>
-            </div>
-            <div class="testimonials-footer">
-                <p class="testimonials-note">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
-                    </svg>
-                    Отзывы с Google Maps и Яндекс.Карт
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pricing Section -->
-    <section class="pricing">
-        <div class="container">
-            <div class="pricing-card">
-                <div class="pricing-badge">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                    </svg>
-                    Специальное предложение
-                </div>
-                <h2>Разовое занятие по мотокроссу</h2>
-                <p class="pricing-description">
-                    С головой окунетесь в завораживающий мир мотокросса с крутыми виражами, головокружительными трамплинами и резкими подъемами-спусками. Познаете азы управления внедорожным мотоциклом и получите мощнейший заряд адреналина.
-                </p>
-                <p class="pricing-description">
-                    Профессиональный тренер выстраивает программу прогресса от занятия к занятию, но уже на первой тренировке вы сможете самостоятельно прокатиться. Занятия проходят во все времена года!
-                </p>
-                <div class="pricing-includes">
-                    <h3>
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="20 6 9 17 4 12"></polyline>
-                        </svg>
-                        В стоимость включено:
-                    </h3>
-                    <ul>
-                        <li>
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="20 6 9 17 4 12"></polyline>
-                            </svg>
-                            Внедорожный японский мотоцикл
-                        </li>
-                        <li>
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="20 6 9 17 4 12"></polyline>
-                            </svg>
-                            Полный комплект экипировки
-                        </li>
-                        <li>
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="20 6 9 17 4 12"></polyline>
-                            </svg>
-                            Профессиональная трасса
-                        </li>
-                        <li>
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="20 6 9 17 4 12"></polyline>
-                            </svg>
-                            Опытный тренер-профессионал
-                        </li>
-                    </ul>
-                    <div class="duration-badge">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <polyline points="12 6 12 12 16 14"></polyline>
-                        </svg>
-                        <strong>Продолжительность:</strong> 1,5 часа чистого времени на треке
-                    </div>
-                </div>
-                <button class="btn btn-primary btn-large" onclick="scrollToForm()">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                        <circle cx="8.5" cy="7" r="4"></circle>
-                        <line x1="20" y1="8" x2="20" y2="14"></line>
-                        <line x1="23" y1="11" x2="17" y2="11"></line>
-                    </svg>
-                    Получить бонус 1000 ₽
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <div class="contact-map">
-            <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3Aed66af2a8f7a87e3c2b5e8f8e2d6c1e0a2b5c8e8&amp;source=constructor" width="100%" height="600" frameborder="0" title="Карта местоположения ZRT School"></iframe>
-            <div class="contact-overlay">
-                <div class="contact-card">
-                    <h2>Контакты</h2>
-                    <div class="contact-item">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                        </svg>
-                        <div>
-                            <span class="contact-label">Телефон:</span>
-                            <a href="tel:84996459926" class="contact-value">8-499-645-99-26</a>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                            <circle cx="12" cy="10" r="3"></circle>
-                        </svg>
-                        <div>
-                            <span class="contact-label">Адрес:</span>
-                            <p class="contact-value">д.Рузино, Солнечногорский район, Москва<br><small>20 минут от МКАДа по Пятницкому или Ленинградскому шоссе</small></p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <polyline points="12 6 12 12 16 14"></polyline>
-                        </svg>
-                        <div>
-                            <span class="contact-label">Режим работы:</span>
-                            <p class="contact-value">Ежедневно с 9:00 до 21:00</p>
-                        </div>
-                    </div>
-                    <div class="social-links">
-                        <a href="#" class="social-link" title="WhatsApp">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-                            </svg>
-                        </a>
-                        <a href="#" class="social-link" title="Telegram">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
-                            </svg>
-                        </a>
-                        <a href="#" class="social-link" title="VK">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M15.684 0H8.316C1.592 0 0 1.592 0 8.316v7.368C0 22.408 1.592 24 8.316 24h7.368C22.408 24 24 22.408 24 15.684V8.316C24 1.592 22.391 0 15.684 0zm3.692 17.123h-1.744c-.66 0-.864-.525-2.05-1.727-1.033-1-1.49-1.135-1.744-1.135-.356 0-.458.102-.458.593v1.575c0 .424-.135.678-1.253.678-1.846 0-3.896-1.118-5.335-3.202C4.624 10.857 4.03 8.57 4.03 8.096c0-.254.102-.491.593-.491h1.744c.44 0 .61.203.78.678.863 2.49 2.303 4.675 2.896 4.675.22 0 .322-.102.322-.66V9.721c-.068-1.186-.695-1.287-.695-1.71 0-.203.17-.407.44-.407h2.744c.373 0 .508.203.508.643v3.473c0 .372.17.508.271.508.22 0 .407-.136.813-.542 1.254-1.406 2.151-3.574 2.151-3.574.119-.254.322-.491.763-.491h1.744c.525 0 .644.27.525.643-.22 1.017-2.354 4.031-2.354 4.031-.186.305-.254.44 0 .78.186.254.796.78 1.203 1.253.745.847 1.320 1.558 1.473 2.05.17.49-.085.744-.576.744z"/>
-                            </svg>
-                        </a>
-                        <a href="#" class="social-link" title="Instagram">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Form Section -->
-    <section class="form-section" id="form">
-        <div class="container">
-            <div class="form-container">
-                <div class="form-header">
-                    <h2>Записаться на тренировку</h2>
-                    <p class="form-subtitle">Оставьте заявку, и менеджер подберет удобные дату и время</p>
-                    <div class="form-bonus">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-                        </svg>
-                        Бонус 1000₽ на первое занятие
-                    </div>
-                </div>
-                
-                <form id="contactForm" onsubmit="handleSubmit(event)" novalidate>
-                    <div class="form-group">
-                        <label for="name">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                                <circle cx="12" cy="7" r="4"></circle>
-                            </svg>
-                            Ваше имя
-                        </label>
-                        <input type="text" id="name" name="name" placeholder="Иван Иванов" required>
-                        <span class="error-message">Пожалуйста, введите ваше имя</span>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="phone">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                            </svg>
-                            Телефон
-                        </label>
-                        <input type="tel" id="phone" name="phone" placeholder="+7 (999) 123-45-67" required pattern="[+]?[0-9\s\-()]+">
-                        <span class="error-message">Введите корректный номер телефона</span>
-                    </div>
-
-                    <div class="form-group">
-                        <label>
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                            </svg>
-                            Удобный способ связи
-                        </label>
-                        <div class="contact-methods">
-                            <label class="radio-label">
-                                <input type="radio" name="contact_method" value="telegram" checked>
-                                <span class="radio-custom"></span>
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
-                                </svg>
-                                Telegram
-                            </label>
-                            <label class="radio-label">
-                                <input type="radio" name="contact_method" value="phone">
-                                <span class="radio-custom"></span>
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                                </svg>
-                                Позвонить
-                            </label>
-                            <label class="radio-label">
-                                <input type="radio" name="contact_method" value="whatsapp">
-                                <span class="radio-custom"></span>
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-                                </svg>
-                                WhatsApp
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="form-group checkbox-group">
-                        <label class="checkbox-label">
-                            <input type="checkbox" name="bonus" checked>
-                            <span class="checkbox-custom"></span>
-                            <span>Хочу получить бонус 1000₽ на первое занятие</span>
-                        </label>
-                    </div>
-
-                    <div class="form-group checkbox-group">
-                        <label class="checkbox-label">
-                            <input type="checkbox" name="privacy" required>
-                            <span class="checkbox-custom"></span>
-                            <span>Я согласен с <a href="#privacy" onclick="showPrivacy()">политикой конфиденциальности</a></span>
-                        </label>
-                        <span class="error-message">Необходимо согласие с политикой конфиденциальности</span>
-                    </div>
-
-                    <button type="submit" class="submit-button">
-                        <span class="button-text">Отправить заявку</span>
-                        <span class="button-loader"></span>
-                    </button>
-                </form>
-
-                <p class="form-footer">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                    </svg>
-                    Ваши данные надежно защищены
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Floating Buttons -->
-    <div class="floating-buttons">
-        <a href="tel:84996459926" class="floating-btn floating-btn-phone" title="Позвонить">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-            </svg>
-        </a>
-        <a href="#" class="floating-btn floating-btn-whatsapp" title="WhatsApp">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-            </svg>
-        </a>
+    <div class="container footer-rule" aria-hidden="true"></div>
+    <div class="container footer-legal">
+      <div class="footer-owner">
+        <strong>ИП Образцов Сергей Юрьевич</strong>
+        <span>ИНН 561413487005</span>
+      </div>
+      <nav aria-label="Юридические документы">
+        <a href="privacy.html" target="_blank" rel="noopener noreferrer">Политика конфиденциальности <span aria-hidden="true">↗</span></a>
+        <a href="offer.html" target="_blank" rel="noopener noreferrer">Публичная оферта <span aria-hidden="true">↗</span></a>
+        <a href="payment.html" target="_blank" rel="noopener noreferrer">Оплата <span aria-hidden="true">↗</span></a>
+      </nav>
     </div>
+  </footer>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>ZRT School</h4>
-                    <p>Школа мотокросса №1 в Москве</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Контакты</h4>
-                    <p>Телефон: <a href="tel:84996459926">8-499-645-99-26</a></p>
-                    <p>Режим работы: ежедневно 9:00-21:00</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Информация</h4>
-                    <p><a href="#privacy" onclick="showPrivacy()">Политика конфиденциальности</a></p>
-                    <p><a href="#" onclick="showPrivacy()">Публичная оферта</a></p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 ZRT School. Все права защищены.</p>
-                <p class="made-by">Made with ❤️</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Success Modal -->
-    <div id="successModal" class="modal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeModal()">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
-            </button>
-            <div class="modal-icon">
-                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                </svg>
-            </div>
-            <h2>Заявка успешно отправлена!</h2>
-            <p>Наш менеджер свяжется с вами в ближайшее время для уточнения деталей.</p>
-            <button class="btn btn-primary" onclick="closeModal()">Отлично</button>
-        </div>
-    </div>
-
-    <script src="script-improved.js"></script>
+  <div class="messenger-float" aria-label="Связаться с ZRT">
+    <a class="messenger-float__button messenger-float__button--telegram" href="https://t.me/zrt_manager" target="_blank" rel="noopener noreferrer" aria-label="Написать в Telegram">
+      <img src="https://umnico.com/assets/img/telegram-fbbfa74e60e6133540eda1ab8c118b54.svg" alt="">
+    </a>
+    <a class="messenger-float__button messenger-float__button--whatsapp" id="wa-float-button" href="https://api.whatsapp.com/send?phone=79068486626" target="_blank" rel="noopener noreferrer" aria-label="Написать в WhatsApp">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="">
+    </a>
+    <a class="messenger-float__button messenger-float__button--max" href="https://max.ru/u/f9LHodD0cOK14dejlOGH0M6P4dkPjRtAi3emkrxp4XMFS08B9nvnpVDYAFk?" target="_blank" rel="noopener noreferrer" aria-label="Написать в MAX">
+      <img src="assets/max-colored.svg" alt="">
+    </a>
+  </div>
 </body>
 </html>
