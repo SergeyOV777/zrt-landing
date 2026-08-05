@@ -1390,6 +1390,18 @@ body[data-scenario="beginner"] .choice-button--beginner {
   font-style: normal;
 }
 
+.form-honeypot {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
 .privacy {
   margin: 12px 0 0;
   display: flex;
@@ -1417,7 +1429,8 @@ body[data-scenario="beginner"] .choice-button--beginner {
   font-weight: 800;
 }
 
-.form-success {
+.form-success,
+.form-error {
   margin-top: 16px;
   padding: 15px;
   border-left: 4px solid var(--accent);
@@ -1425,18 +1438,27 @@ body[data-scenario="beginner"] .choice-button--beginner {
 }
 
 .form-success strong,
-.form-success span {
+.form-success span,
+.form-error strong,
+.form-error span {
   display: block;
 }
 
-.form-success strong {
+.form-success strong,
+.form-error strong {
   font-size: 12px;
 }
 
-.form-success span {
+.form-success span,
+.form-error span {
   margin-top: 4px;
   color: #66645e;
   font-size: 9px;
+}
+
+.form-error {
+  border-left-color: #b42318;
+  background: #f9e8e6;
 }
 
 .location {

@@ -1,6 +1,54 @@
 const body = document.body;
 const scenarioButtons = [...document.querySelectorAll("[data-scenario-select]")];
 const variants = [...document.querySelectorAll("[data-variant]")];
+const leadEndpoint = 'https://zrt-amocrm-lead-receiver.magniffique.workers.dev/v1/leads';
+const leadUtmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+
+function rememberLeadAttribution() {
+  const params = new URLSearchParams(window.location.search);
+
+  leadUtmKeys.forEach((key) => {
+    const value = params.get(key);
+    if (!value) return;
+
+    try {
+      localStorage.setItem(`lead_${key}`, value.slice(0, 300));
+    } catch (error) {
+      // Отправка формы работает и без локального хранилища.
+    }
+  });
+}
+
+function getLeadAttribution() {
+  const attribution = {};
+  const params = new URLSearchParams(window.location.search);
+
+  leadUtmKeys.forEach((key) => {
+    let value = params.get(key);
+
+    if (!value) {
+      try {
+        value = localStorage.getItem(`lead_${key}`);
+      } catch (error) {
+        // UTM-метки необязательны для отправки заявки.
+      }
+    }
+
+    if (value) attribution[key] = value.slice(0, 300);
+  });
+
+  return attribution;
+}
+
+function createSubmissionId() {
+  if (typeof crypto?.randomUUID === 'function') return crypto.randomUUID();
+
+  const bytes = new Uint8Array(16);
+  crypto.getRandomValues(bytes);
+  return [...bytes].map((byte) => byte.toString(16).padStart(2, '0')).join('');
+}
+
+rememberLeadAttribution();
 
 function setScenario(scenario, { scroll = false } = {}) {
   if (!['beginner', 'experienced'].includes(scenario)) return;
@@ -72,15 +120,20 @@ document.querySelector('input[name="name"]')?.addEventListener('input', (event) 
 
 const form = document.querySelector('#contactForm');
 const successMessage = form?.querySelector('.form-success');
+const errorMessage = form?.querySelector('.form-error');
 
-form?.addEventListener('submit', (event) => {
+form?.addEventListener('submit', async (event) => {
   event.preventDefault();
 
   const nameInput = form.elements.name;
   const phone = form.elements.phone;
   const privacy = form.elements.privacy;
+  const honeypot = form.elements.website;
   const phoneDigits = phone.value.replace(/\D/g, '');
   let isValid = true;
+
+  successMessage.hidden = true;
+  errorMessage.hidden = true;
 
   nameInput.closest('label').classList.toggle('is-invalid', nameInput.value.trim().length < 2);
   phone.closest('label').classList.toggle('is-invalid', phoneDigits.length !== 11);
@@ -97,11 +150,58 @@ form?.addEventListener('submit', (event) => {
     return;
   }
 
+  if (honeypot.value) return;
+
   const submitButton = form.querySelector('.button--submit');
   submitButton.disabled = true;
   submitButton.style.opacity = '0.65';
-  successMessage.hidden = false;
-  successMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  submitButton.setAttribute('aria-busy', 'true');
+
+  const submissionId = form.dataset.submissionId || createSubmissionId();
+  form.dataset.submissionId = submissionId;
+  const controller = new AbortController();
+  const timeoutId = window.setTimeout(() => controller.abort(), 15000);
+
+  try {
+    const response = await fetch(leadEndpoint, {
+      method: 'POST',
+      mode: 'cors',
+      credentials: 'omit',
+      cache: 'no-store',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        submission_id: submissionId,
+        form_id: 'zrt-main-booking',
+        source: 'adv.zrt-school.ru',
+        page: `${window.location.origin}${window.location.pathname}`,
+        scenario: body.dataset.scenario || 'beginner',
+        name: nameInput.value.trim().slice(0, 100),
+        phone: `+${phoneDigits}`,
+        contact_method: form.elements.contact.value,
+        privacy_accepted: true,
+        attribution: getLeadAttribution()
+      }),
+      signal: controller.signal
+    });
+
+    const result = await response.json().catch(() => null);
+    if (!response.ok || result?.ok !== true) throw new Error('Lead receiver rejected the request');
+
+    delete form.dataset.submissionId;
+    form.reset();
+    successMessage.hidden = false;
+    successMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  } catch (error) {
+    errorMessage.hidden = false;
+    errorMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    submitButton.disabled = false;
+    submitButton.style.opacity = '';
+  } finally {
+    window.clearTimeout(timeoutId);
+    submitButton.removeAttribute('aria-busy');
+  }
 });
 
 (() => {
@@ -110,30 +210,8 @@ form?.addEventListener('submit', (event) => {
 
   const phone = '79068486626';
   const baseText = 'Обращение из сайта\nЗдравствуйте! Меня заинтересовало ваше предложение.';
-  const utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
-  const params = new URLSearchParams(window.location.search);
-
-  utmKeys.forEach((key) => {
-    const value = params.get(key);
-    if (!value) return;
-    try {
-      localStorage.setItem(`lead_${key}`, value);
-    } catch (error) {
-      // Ссылка остаётся рабочей, даже если локальное хранилище недоступно.
-    }
-  });
-
   function getUtmText() {
-    const lines = [];
-
-    utmKeys.forEach((key) => {
-      try {
-        const value = localStorage.getItem(`lead_${key}`);
-        if (value) lines.push(`${key}: ${value}`);
-      } catch (error) {
-        // UTM-метки необязательны для открытия WhatsApp.
-      }
-    });
+    const lines = Object.entries(getLeadAttribution()).map(([key, value]) => `${key}: ${value}`);
 
     return lines.length ? `\n\nUTM-метки:\n${lines.join('\n')}` : '';
   }
