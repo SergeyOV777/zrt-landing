@@ -189,6 +189,10 @@ form?.addEventListener('submit', async (event) => {
     const result = await response.json().catch(() => null);
     if (!response.ok || result?.ok !== true) throw new Error('Lead receiver rejected the request');
 
+    window.zrtMetrikaGoal?.('lead_sent', {
+      scenario: body.dataset.scenario || 'beginner',
+      contact_method: form.elements.contact.value
+    });
     delete form.dataset.submissionId;
     form.reset();
     successMessage.hidden = false;
@@ -216,24 +220,8 @@ form?.addEventListener('submit', async (event) => {
     return lines.length ? `\n\nUTM-метки:\n${lines.join('\n')}` : '';
   }
 
-  function getMetrikaId() {
-    if (window.mainMetrikaId) return window.mainMetrikaId;
-    if (window.tildametrikaid) return window.tildametrikaid;
-
-    for (const key in window) {
-      if (/^yaCounter\d+$/.test(key)) return key.replace('yaCounter', '');
-    }
-
-    return null;
-  }
-
   button.addEventListener('click', () => {
     const finalText = baseText + getUtmText();
     button.href = `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(finalText)}`;
-
-    if (typeof window.ym === 'function') {
-      const counterId = getMetrikaId();
-      if (counterId) window.ym(counterId, 'reachGoal', 'whatsapp_click');
-    }
   });
 })();
