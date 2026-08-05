@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="yandex-metrika.js"></script>
   <meta name="description" content="Первое занятие по мотокроссу в ZRT: экипировка, мотоцикл и тренер включены. Скидка 1000 ₽ на первый заезд.">
   <meta name="theme-color" content="#111111">
   <title>ZRT — первый заезд по мотокроссу</title>
@@ -15,6 +16,7 @@
   <script src="script.js" defer></script>
 </head>
 <body data-scenario="beginner">
+  <noscript><div><img src="https://mc.yandex.ru/watch/32428555" style="position:absolute; left:-9999px;" alt=""></div></noscript>
   <a class="skip-link" href="#scenario">К основному содержимому</a>
 
   <header class="site-header" aria-label="Главная навигация">
@@ -311,12 +313,12 @@
           </div>
           <label>
             <span>Ваше имя</span>
-            <input type="text" name="name" autocomplete="name" placeholder="Как к вам обращаться" required>
+            <input class="ym-disable-keys" type="text" name="name" autocomplete="name" placeholder="Как к вам обращаться" required>
             <small class="field-error">Введите имя</small>
           </label>
           <label>
             <span>Телефон</span>
-            <input type="tel" name="phone" autocomplete="tel" inputmode="tel" placeholder="+7 999 000-00-00" required>
+            <input class="ym-disable-keys" type="tel" name="phone" autocomplete="tel" inputmode="tel" placeholder="+7 999 000-00-00" required>
             <small class="field-error">Введите корректный номер</small>
           </label>
           <label class="form-honeypot" aria-hidden="true">
