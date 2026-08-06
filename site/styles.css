@@ -2266,6 +2266,11 @@ body[data-scenario="beginner"] .choice-button--beginner {
 }
 
 @media (max-width: 480px) {
+  #CalltouchWidgetFrame {
+    left: auto !important;
+    right: 0 !important;
+  }
+
   .messenger-float {
     left: 14px;
     bottom: 14px;
