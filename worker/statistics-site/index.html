@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Закрытая статистика заявок рекламных страниц ZRT.">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="referrer" content="no-referrer">
+  <meta name="theme-color" content="#111111">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self'; img-src 'self'; style-src 'self'; script-src 'self'; font-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; upgrade-insecure-requests">
+  <title>ZRT — статистика заявок</title>
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="stylesheet" href="statistics.css">
+  <script src="statistics.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">К статистике</a>
+
+  <header class="dashboard-header">
+    <a class="dashboard-logo" href="/" aria-label="ZRT School — на главную">
+      <img src="assets/zrt-logo.png" alt="ZRT School">
+    </a>
+    <div class="dashboard-header__meta">
+      <span class="secure-badge"><i aria-hidden="true"></i> Закрытая аналитика</span>
+      <span id="lastUpdated">Данные загружаются…</span>
+    </div>
+    <button class="refresh-button" id="refreshButton" type="button">
+      Обновить <span aria-hidden="true">↻</span>
+    </button>
+  </header>
+
+  <main id="main" class="dashboard-main">
+    <section class="dashboard-intro" aria-labelledby="pageTitle">
+      <p class="eyebrow"><span></span> Рекламный лендинг ZRT</p>
+      <div class="dashboard-intro__row">
+        <div>
+          <h1 id="pageTitle">Статистика <em>заявок</em></h1>
+          <p>Количество заполнений хранится отдельно от amoCRM и не изменится, если сделку удалят.</p>
+        </div>
+        <a class="export-button" id="exportButton" href="#">
+          Выгрузить отчёт <span aria-hidden="true">↓</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="filter-panel" aria-labelledby="filterTitle">
+      <div class="filter-panel__top">
+        <h2 id="filterTitle">Период и источники</h2>
+        <div class="quick-periods" aria-label="Быстрый выбор периода">
+          <button type="button" data-period="today">Сегодня</button>
+          <button type="button" data-period="yesterday">Вчера</button>
+          <button type="button" data-period="7">7 дней</button>
+          <button type="button" data-period="previous-week">Прошлая неделя</button>
+          <button type="button" data-period="30" class="is-active">30 дней</button>
+          <button type="button" data-period="previous-month">Прошлый месяц</button>
+          <button type="button" data-period="current-month">Текущий месяц</button>
+          <button type="button" data-period="all">Всё время</button>
+        </div>
+      </div>
+
+      <form id="filterForm" class="filters">
+        <label>
+          <span>С даты</span>
+          <input id="dateFrom" name="from" type="date" required>
+        </label>
+        <label>
+          <span>По дату</span>
+          <input id="dateTo" name="to" type="date" required>
+        </label>
+        <label>
+          <span>Источник формы</span>
+          <select id="source" name="source">
+            <option value="">Все сайты</option>
+          </select>
+        </label>
+        <label>
+          <span>utm_source</span>
+          <select id="utmSource" name="utm_source">
+            <option value="">Все utm_source</option>
+          </select>
+        </label>
+        <label>
+          <span>utm_campaign</span>
+          <select id="utmCampaign" name="utm_campaign">
+            <option value="">Все кампании</option>
+          </select>
+        </label>
+        <button class="apply-button" type="submit">Применить <span aria-hidden="true">→</span></button>
+      </form>
+    </section>
+
+    <div id="dashboardStatus" class="dashboard-status" role="status" aria-live="polite">Загружаем статистику…</div>
+
+    <section class="metrics" aria-label="Основные показатели">
+      <article class="metric-card metric-card--primary">
+        <p>Заполнено форм</p>
+        <strong id="metricTotal">—</strong>
+        <span>все зафиксированные отправки</span>
+      </article>
+      <article class="metric-card metric-card--beginner">
+        <p>Новичок</p>
+        <strong id="metricBeginner">—</strong>
+        <span id="metricBeginnerShare">— от заполнений</span>
+      </article>
+      <article class="metric-card metric-card--experienced">
+        <p>Уже катал</p>
+        <strong id="metricExperienced">—</strong>
+        <span id="metricExperiencedShare">— от заполнений</span>
+      </article>
+      <article class="metric-card">
+        <p>Создано сделок</p>
+        <strong id="metricDeals">—</strong>
+        <span id="metricConversion">— от заполнений</span>
+      </article>
+      <article class="metric-card metric-card--error">
+        <p>Ошибки отправки</p>
+        <strong id="metricErrors">—</strong>
+        <span id="metricFailedNow">сейчас не доставлено: —</span>
+      </article>
+    </section>
+
+    <section class="panel trend-panel" aria-labelledby="trendTitle">
+      <div class="panel-heading">
+        <div>
+          <p class="panel-index">01 / ДИНАМИКА</p>
+          <h2 id="trendTitle">Заявки по дням</h2>
+        </div>
+        <div class="chart-legend" aria-label="Обозначения графика">
+          <span><i class="legend-filled"></i> Заполнено</span>
+          <span><i class="legend-deals"></i> Сделки</span>
+          <span><i class="legend-errors"></i> Ошибки</span>
+        </div>
+      </div>
+      <div id="dailyChart" class="daily-chart" role="img" aria-label="График заявок по дням"></div>
+      <p id="chartEmpty" class="empty-state" hidden>За выбранный период заявок нет.</p>
+    </section>
+
+    <section class="panel" aria-labelledby="sourcesTitle">
+      <div class="panel-heading">
+        <div>
+          <p class="panel-index">02 / ИСТОЧНИКИ</p>
+          <h2 id="sourcesTitle">UTM-метки</h2>
+        </div>
+        <p class="panel-note">Показываем комбинации меток, с которыми была заполнена форма.</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Источник формы</th>
+              <th>utm_source</th>
+              <th>utm_medium</th>
+              <th>utm_campaign</th>
+              <th>utm_content</th>
+              <th>utm_term</th>
+              <th class="number-cell">Формы</th>
+              <th class="number-cell">Сделки</th>
+              <th class="number-cell">Ошибки</th>
+            </tr>
+          </thead>
+          <tbody id="sourcesTable"></tbody>
+        </table>
+      </div>
+      <p id="sourcesEmpty" class="empty-state" hidden>За выбранный период UTM-данных нет.</p>
+    </section>
+
+    <section class="panel error-panel" aria-labelledby="errorsTitle">
+      <div class="panel-heading">
+        <div>
+          <p class="panel-index">03 / КОНТРОЛЬ ДОСТАВКИ</p>
+          <h2 id="errorsTitle">Ошибки отправки</h2>
+        </div>
+        <p class="panel-note">История сохраняется, даже если повторная попытка позже прошла успешно.</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Дата и время</th>
+              <th>Сценарий</th>
+              <th>Источник формы</th>
+              <th>utm_source</th>
+              <th>Кампания</th>
+              <th>Попытка</th>
+              <th>Причина</th>
+              <th>Состояние заявки</th>
+            </tr>
+          </thead>
+          <tbody id="errorsTable"></tbody>
+        </table>
+      </div>
+      <p id="errorsEmpty" class="empty-state empty-state--success" hidden>Ошибок за выбранный период нет.</p>
+    </section>
+
+    <section class="panel" aria-labelledby="submissionsTitle">
+      <div class="panel-heading">
+        <div>
+          <p class="panel-index">04 / ПОСЛЕДНИЕ ЗАЯВКИ</p>
+          <h2 id="submissionsTitle">Журнал заполнений</h2>
+        </div>
+        <p class="panel-note">Без имён и телефонов. В таблице показаны последние 100 записей.</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Дата и время</th>
+              <th>Сценарий</th>
+              <th>Источник формы</th>
+              <th>Страница</th>
+              <th>Способ связи</th>
+              <th>utm_source</th>
+              <th>Кампания</th>
+              <th>Статус</th>
+              <th>Попытки</th>
+              <th>Ошибки</th>
+              <th>Сделка amoCRM</th>
+            </tr>
+          </thead>
+          <tbody id="submissionsTable"></tbody>
+        </table>
+      </div>
+      <p id="submissionsEmpty" class="empty-state" hidden>За выбранный период заявок нет.</p>
+    </section>
+  </main>
+
+  <footer class="dashboard-footer">
+    <p>ZRT / независимый журнал лидов</p>
+    <p>Персональные данные клиентов на этом экране не хранятся и не отображаются.</p>
+  </footer>
+</body>
+</html>
