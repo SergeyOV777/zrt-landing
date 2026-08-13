@@ -1,0 +1,32 @@
+{
+  "$schema": "../node_modules/wrangler/config-schema.json",
+  "name": "zrt-lead-statistics",
+  "main": "src/index.js",
+  "compatibility_date": "2026-08-05",
+  "workers_dev": true,
+  "preview_urls": false,
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1
+  },
+  "assets": {
+    "directory": "statistics-site",
+    "binding": "ASSETS",
+    "html_handling": "none",
+    "run_worker_first": true
+  },
+  "vars": {
+    "STATS_ONLY": "true",
+    "ACCESS_AUD": "6e32872592b683c5e32c65744c66acfa63b4ba98798f71eb226b6df7bf3760f5",
+    "ACCESS_ALLOWED_EMAIL": "magniffique@gmail.com,sergeyobraztsovk@gmail.com",
+    "ACCESS_TEAM_DOMAIN": "holy-base-80ee.cloudflareaccess.com"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "zrt-lead-journal",
+      "database_id": "982a4cdb-e441-4659-b3c7-c03a9d1e57fc",
+      "migrations_dir": "migrations"
+    }
+  ]
+}
