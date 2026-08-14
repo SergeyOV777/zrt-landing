@@ -15,6 +15,9 @@
     "enabled": true,
     "head_sampling_rate": 1
   },
+  "triggers": {
+    "crons": ["*/5 * * * *"]
+  },
   "vars": {
     "ALLOWED_ORIGIN": "https://adv.zrt-school.ru",
     "ACCESS_AUD": "ecb0a2a3440be86430aef7342179e644d05f8149fe7139a25160afd11213ff71",
@@ -22,7 +25,9 @@
     "ACCESS_TEAM_DOMAIN": "holy-base-80ee.cloudflareaccess.com",
     "AMO_BASE_URL": "https://zrtschool.amocrm.ru",
     "AMO_PIPELINE_ID": "7437290",
-    "AMO_UNSORTED_STATUS_ID": "61762778"
+    "AMO_UNSORTED_STATUS_ID": "61762778",
+    "YANDEX_METRIKA_COUNTER_ID": "32428555",
+    "YANDEX_METRIKA_OFFLINE_GOAL": "lead_created_crm"
   },
   "d1_databases": [
     {

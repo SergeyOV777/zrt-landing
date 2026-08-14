@@ -1,4 +1,10 @@
 import { buildAmoLeadTags } from './amo-tags.mjs';
+import {
+  DEFAULT_METRIKA_TARGET,
+  metrikaRetryDelaySeconds,
+  normalizeMetrikaIdentifiers,
+  uploadMetrikaOfflineConversion
+} from './metrika-offline.mjs';
 
 const MAX_BODY_BYTES = 16_384;
 const RETRY_AFTER_SECONDS = 60;
@@ -11,6 +17,8 @@ const CONTACT_METHODS = new Set(['telegram', 'whatsapp', 'max', 'phone']);
 const SCENARIOS = new Set(['beginner', 'experienced']);
 const ATTRIBUTION_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
 const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
+const METRIKA_LEASE_MS = 60_000;
+const METRIKA_MATCH_WINDOW_SECONDS = 21 * 24 * 60 * 60;
 
 let accessJwksCache = null;
 
@@ -130,13 +138,37 @@ export default {
       console.error(JSON.stringify({ event: 'journal_finalize_failed', submission_id: payload.submissionId }));
     }
 
+    let metrikaQueued = false;
+    try {
+      metrikaQueued = await enqueueMetrikaConversion(
+        env.DB,
+        payload,
+        env.YANDEX_METRIKA_OFFLINE_GOAL || DEFAULT_METRIKA_TARGET
+      );
+    } catch {
+      console.error(JSON.stringify({ event: 'metrika_enqueue_failed', submission_id: payload.submissionId }));
+    }
+
     ctx.waitUntil(
       addAmoNote(env, amoResult.id, payload).catch(() => {
         console.warn(JSON.stringify({ event: 'amo_note_failed', submission_id: payload.submissionId }));
       })
     );
 
+    if (metrikaQueued) {
+      ctx.waitUntil(
+        processMetrikaOutbox(env, 1).catch(() => {
+          console.warn(JSON.stringify({ event: 'metrika_background_attempt_failed' }));
+        })
+      );
+    }
+
     return json({ ok: true }, 200, cors);
+  },
+
+  async scheduled(_controller, env, ctx) {
+    if (env.STATS_ONLY === 'true') return;
+    ctx.waitUntil(processMetrikaOutbox(env, 25));
   }
 };
 
@@ -785,6 +817,8 @@ function validatePayload(raw, allowedOrigin) {
     attribution[key] = cleanNullableString(rawAttribution[key], 300);
   }
 
+  const metrika = normalizeMetrikaIdentifiers(raw.metrika);
+
   return {
     ok: true,
     value: {
@@ -795,7 +829,8 @@ function validatePayload(raw, allowedOrigin) {
       pagePath: pageUrl.pathname.slice(0, 500),
       scenario,
       contactMethod,
-      attribution
+      attribution,
+      metrika
     }
   };
 }
@@ -816,6 +851,145 @@ function cleanString(value, maxLength) {
 function cleanNullableString(value, maxLength) {
   const cleaned = cleanString(value, maxLength);
   return cleaned || null;
+}
+
+function hasMetrikaIdentifiers(metrika) {
+  return Boolean(metrika?.clientId || metrika?.yclid);
+}
+
+async function enqueueMetrikaConversion(db, payload, target) {
+  if (!hasMetrikaIdentifiers(payload.metrika)) return false;
+
+  const now = new Date();
+  const nowIso = now.toISOString();
+  const result = await db.prepare(
+    `INSERT OR IGNORE INTO metrika_offline_conversions (
+       submission_id, created_at, updated_at, conversion_at, target,
+       client_id, yclid, status, attempts, next_attempt_at
+     ) VALUES (?, ?, ?, ?, ?, ?, ?, 'pending', 0, ?)`
+  ).bind(
+    payload.submissionId,
+    nowIso,
+    nowIso,
+    Math.floor(now.getTime() / 1000),
+    target,
+    payload.metrika.clientId,
+    payload.metrika.yclid,
+    nowIso
+  ).run();
+
+  return result.meta?.changes === 1;
+}
+
+async function processMetrikaOutbox(env, limit) {
+  if (!env.YANDEX_METRIKA_OAUTH_TOKEN) return 0;
+
+  let processed = 0;
+  for (let index = 0; index < limit; index += 1) {
+    const conversion = await claimMetrikaConversion(env.DB);
+    if (!conversion) break;
+
+    const ageSeconds = Math.floor(Date.now() / 1000) - Number(conversion.conversion_at);
+    if (!Number.isFinite(ageSeconds) || ageSeconds >= METRIKA_MATCH_WINDOW_SECONDS) {
+      await markMetrikaConversionExpired(env.DB, conversion.submission_id);
+      processed += 1;
+      continue;
+    }
+
+    try {
+      const result = await uploadMetrikaOfflineConversion(env, conversion);
+      await markMetrikaConversionSent(env.DB, conversion.submission_id, result.uploadId);
+      console.log(JSON.stringify({
+        event: 'metrika_offline_uploaded',
+        submission_id: conversion.submission_id,
+        upload_id: result.uploadId
+      }));
+    } catch (error) {
+      const code = safeMetrikaErrorCode(error);
+      await releaseMetrikaConversion(env.DB, conversion, code);
+      console.warn(JSON.stringify({
+        event: 'metrika_offline_retry_scheduled',
+        submission_id: conversion.submission_id,
+        code
+      }));
+    }
+
+    processed += 1;
+  }
+
+  return processed;
+}
+
+async function claimMetrikaConversion(db) {
+  const now = new Date();
+  const nowIso = now.toISOString();
+  const candidate = await db.prepare(
+    `SELECT submission_id, conversion_at, target, client_id, yclid, attempts
+     FROM metrika_offline_conversions
+     WHERE status IN ('pending', 'processing')
+       AND next_attempt_at <= ?
+     ORDER BY next_attempt_at, created_at
+     LIMIT 1`
+  ).bind(nowIso).first();
+
+  if (!candidate) return null;
+
+  const leaseUntil = new Date(now.getTime() + METRIKA_LEASE_MS).toISOString();
+  const claim = await db.prepare(
+    `UPDATE metrika_offline_conversions
+     SET status = 'processing', attempts = attempts + 1,
+         last_attempt_at = ?, next_attempt_at = ?, updated_at = ?
+     WHERE submission_id = ?
+       AND status IN ('pending', 'processing')
+       AND next_attempt_at <= ?`
+  ).bind(nowIso, leaseUntil, nowIso, candidate.submission_id, nowIso).run();
+
+  if (claim.meta?.changes !== 1) return null;
+  return {
+    ...candidate,
+    attempts: (Number(candidate.attempts) || 0) + 1
+  };
+}
+
+async function markMetrikaConversionSent(db, submissionId, uploadId) {
+  const nowIso = new Date().toISOString();
+  await db.prepare(
+    `UPDATE metrika_offline_conversions
+     SET status = 'sent', updated_at = ?, sent_at = ?, upload_id = ?,
+         error_code = NULL, next_attempt_at = NULL,
+         client_id = NULL, yclid = NULL
+     WHERE submission_id = ? AND status = 'processing'`
+  ).bind(nowIso, nowIso, uploadId, submissionId).run();
+}
+
+async function markMetrikaConversionExpired(db, submissionId) {
+  const nowIso = new Date().toISOString();
+  await db.prepare(
+    `UPDATE metrika_offline_conversions
+     SET status = 'expired', updated_at = ?, error_code = 'matching_window_expired',
+         next_attempt_at = NULL, client_id = NULL, yclid = NULL
+     WHERE submission_id = ? AND status = 'processing'`
+  ).bind(nowIso, submissionId).run();
+}
+
+async function releaseMetrikaConversion(db, conversion, code) {
+  const now = new Date();
+  const nextAttemptAt = new Date(
+    now.getTime() + metrikaRetryDelaySeconds(conversion.attempts) * 1000
+  ).toISOString();
+
+  await db.prepare(
+    `UPDATE metrika_offline_conversions
+     SET status = 'pending', updated_at = ?, next_attempt_at = ?, error_code = ?
+     WHERE submission_id = ? AND status = 'processing'`
+  ).bind(now.toISOString(), nextAttemptAt, code, conversion.submission_id).run();
+}
+
+function safeMetrikaErrorCode(error) {
+  const message = String(error?.message || '');
+  return /^metrika_(?:http_\d{3}|timeout|invalid_response|response_too_large|identifier_missing|target_invalid|datetime_invalid|counter_invalid)$/.test(message)
+    ? message
+    : 'metrika_network_error';
 }
 
 async function reserveSubmission(db, payload) {
