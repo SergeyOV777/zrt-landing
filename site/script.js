@@ -159,10 +159,13 @@ form?.addEventListener('submit', async (event) => {
 
   const submissionId = form.dataset.submissionId || createSubmissionId();
   form.dataset.submissionId = submissionId;
-  const controller = new AbortController();
-  const timeoutId = window.setTimeout(() => controller.abort(), 15000);
+  let timeoutId;
 
   try {
+    const metrikaIdentifiers = (await Promise.resolve(window.zrtLeadIdentifiers?.get?.())
+      .catch(() => null)) || { client_id: null, yclid: null };
+    const controller = new AbortController();
+    timeoutId = window.setTimeout(() => controller.abort(), 15000);
     const response = await fetch(leadEndpoint, {
       method: 'POST',
       mode: 'cors',
@@ -181,7 +184,8 @@ form?.addEventListener('submit', async (event) => {
         phone: `+${phoneDigits}`,
         contact_method: form.elements.contact.value,
         privacy_accepted: true,
-        attribution: getLeadAttribution()
+        attribution: getLeadAttribution(),
+        metrika: metrikaIdentifiers
       }),
       signal: controller.signal
     });
@@ -203,7 +207,7 @@ form?.addEventListener('submit', async (event) => {
     submitButton.disabled = false;
     submitButton.style.opacity = '';
   } finally {
-    window.clearTimeout(timeoutId);
+    if (timeoutId) window.clearTimeout(timeoutId);
     submitButton.removeAttribute('aria-busy');
   }
 });
