@@ -10,7 +10,7 @@
   }
 })(typeof window !== 'undefined' ? window : null, function () {
   const DEFAULT_ENDPOINTS = [
-    { url: 'https://api.zrt-school.ru/v1/leads', timeoutMs: 5_000 },
+    { url: 'https://zrt-amocrm-lead-receiver.magniffique.workers.dev/v1/leads', timeoutMs: 8_000 },
     { url: 'https://zrt-amocrm-lead-receiver.magniffique.workers.dev/v1/leads', timeoutMs: 15_000 }
   ];
   const PROCESSING_RETRY_DELAYS_MS = [1_000, 1_500, 2_500, 3_500];

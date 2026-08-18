@@ -3,7 +3,7 @@ import { createRequire } from 'node:module';
 import test from 'node:test';
 
 const require = createRequire(import.meta.url);
-const { create } = require('../../site/lead-delivery.js');
+const { DEFAULT_ENDPOINTS, create } = require('../../site/lead-delivery.js');
 
 function jsonResponse(body, status = 200) {
   return Response.json(body, { status });
@@ -28,6 +28,12 @@ function createBrowser(fetchImpl) {
     }
   };
 }
+
+test('retries the production receiver without changing the submission endpoint', () => {
+  assert.match(DEFAULT_ENDPOINTS[0].url, /\.workers\.dev\/v1\/leads$/);
+  assert.equal(DEFAULT_ENDPOINTS[1].url, DEFAULT_ENDPOINTS[0].url);
+  assert.ok(DEFAULT_ENDPOINTS[1].timeoutMs > DEFAULT_ENDPOINTS[0].timeoutMs);
+});
 
 test('uses the first-party endpoint and falls back with the same submission body', async () => {
   const calls = [];
