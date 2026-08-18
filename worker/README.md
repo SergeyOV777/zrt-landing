@@ -18,6 +18,17 @@ node --test worker/tests/*.test.mjs
 wrangler deploy --dry-run --config worker/wrangler.jsonc
 ```
 
+Форма сначала обращается к собственному адресу
+`https://api.zrt-school.ru/v1/leads`, а при сетевой ошибке — к резервному
+`workers.dev`. Оба адреса ведут в один Worker, а одинаковый `submission_id`
+защищает amoCRM от дубля, если первый ответ потерялся в мобильной сети.
+
+При публикации через `wrangler versions upload` маршруты не применяются
+автоматически. После переключения новой версии нужно выполнить
+`wrangler triggers deploy --config worker/wrangler.jsonc` и отдельно проверить
+`/health` на обоих адресах. Эта команда подключает Custom Domain
+`api.zrt-school.ru` и сохраняет остальные маршруты из конфигурации.
+
 После успешного создания сделки Worker ставит отдельную офлайн-конверсию
 `lead_created_crm` в D1-очередь и отправляет её в счётчик Метрики `32428555`
 через официальный API. Сбой Яндекса не меняет ответ формы и не мешает amoCRM:

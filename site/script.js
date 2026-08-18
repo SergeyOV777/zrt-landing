@@ -1,7 +1,6 @@
 const body = document.body;
 const scenarioButtons = [...document.querySelectorAll("[data-scenario-select]")];
 const variants = [...document.querySelectorAll("[data-variant]")];
-const leadEndpoint = 'https://zrt-amocrm-lead-receiver.magniffique.workers.dev/v1/leads';
 const leadUtmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
 
 function rememberLeadAttribution() {
@@ -122,6 +121,42 @@ const form = document.querySelector('#contactForm');
 const successMessage = form?.querySelector('.form-success');
 const errorMessage = form?.querySelector('.form-error');
 
+function showSubmissionError(error) {
+  const title = errorMessage?.querySelector('strong');
+  const description = errorMessage?.querySelector('span');
+  const messages = {
+    rate_limited: [
+      'Слишком много попыток отправки',
+      'Подождите одну минуту и нажмите кнопку ещё раз. Введённые данные сохранены в форме.'
+    ],
+    already_processing: [
+      'Заявка ещё отправляется',
+      'Подождите несколько секунд и нажмите кнопку ещё раз. Повторная отправка не создаст дубль.'
+    ],
+    journal_unavailable: [
+      'Сервис временно недоступен',
+      'Повторите отправку через несколько минут. Введённые данные сохранены в форме.'
+    ],
+    crm_unavailable: [
+      'Сервис временно недоступен',
+      'Повторите отправку через несколько минут. Введённые данные сохранены в форме.'
+    ],
+    service_not_configured: [
+      'Сервис временно недоступен',
+      'Повторите отправку через несколько минут. Введённые данные сохранены в форме.'
+    ]
+  };
+  const [messageTitle, messageDescription] = messages[error?.code] || [
+    'Не удалось отправить заявку',
+    'Попробуйте ещё раз или переключитесь между мобильным интернетом и Wi-Fi. Введённые данные сохранены в форме.'
+  ];
+
+  if (title) title.textContent = messageTitle;
+  if (description) description.textContent = messageDescription;
+  errorMessage.hidden = false;
+  errorMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
 form?.addEventListener('submit', async (event) => {
   event.preventDefault();
 
@@ -159,39 +194,25 @@ form?.addEventListener('submit', async (event) => {
 
   const submissionId = form.dataset.submissionId || createSubmissionId();
   form.dataset.submissionId = submissionId;
-  let timeoutId;
 
   try {
     const metrikaIdentifiers = (await Promise.resolve(window.zrtLeadIdentifiers?.get?.())
       .catch(() => null)) || { client_id: null, yclid: null };
-    const controller = new AbortController();
-    timeoutId = window.setTimeout(() => controller.abort(), 15000);
-    const response = await fetch(leadEndpoint, {
-      method: 'POST',
-      mode: 'cors',
-      credentials: 'omit',
-      cache: 'no-store',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        submission_id: submissionId,
-        form_id: 'zrt-main-booking',
-        source: 'adv.zrt-school.ru',
-        page: `${window.location.origin}${window.location.pathname}`,
-        scenario: body.dataset.scenario || 'beginner',
-        name: nameInput.value.trim().slice(0, 100),
-        phone: `+${phoneDigits}`,
-        contact_method: form.elements.contact.value,
-        privacy_accepted: true,
-        attribution: getLeadAttribution(),
-        metrika: metrikaIdentifiers
-      }),
-      signal: controller.signal
-    });
+    if (!window.zrtLeadDelivery?.send) throw new Error('Lead delivery is unavailable');
 
-    const result = await response.json().catch(() => null);
-    if (!response.ok || result?.ok !== true) throw new Error('Lead receiver rejected the request');
+    await window.zrtLeadDelivery.send({
+      submission_id: submissionId,
+      form_id: 'zrt-main-booking',
+      source: 'adv.zrt-school.ru',
+      page: `${window.location.origin}${window.location.pathname}`,
+      scenario: body.dataset.scenario || 'beginner',
+      name: nameInput.value.trim().slice(0, 100),
+      phone: `+${phoneDigits}`,
+      contact_method: form.elements.contact.value,
+      privacy_accepted: true,
+      attribution: getLeadAttribution(),
+      metrika: metrikaIdentifiers
+    });
 
     window.zrtMetrikaGoal?.('lead_sent', {
       scenario: body.dataset.scenario || 'beginner',
@@ -202,12 +223,10 @@ form?.addEventListener('submit', async (event) => {
     successMessage.hidden = false;
     successMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   } catch (error) {
-    errorMessage.hidden = false;
-    errorMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    showSubmissionError(error);
     submitButton.disabled = false;
     submitButton.style.opacity = '';
   } finally {
-    if (timeoutId) window.clearTimeout(timeoutId);
     submitButton.removeAttribute('aria-busy');
   }
 });

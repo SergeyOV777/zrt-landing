@@ -70,11 +70,16 @@
    `/health` → 200, разрешённый preflight → 204, пустой payload → 400, чужой Origin
    → 403. Тестовую сделку для этих проверок создавать не нужно.
 4. Перевести новую версию на 100% и ещё раз выполнить четыре проверки.
-5. Подключить расписание повторов:
+5. Подключить расписание повторов и маршруты Worker, включая Custom Domain
+   `api.zrt-school.ru`:
 
    ```text
    npx wrangler triggers deploy --config worker/wrangler.jsonc
    ```
+
+   После команды проверить `/health` как на `api.zrt-school.ru`, так и на
+   резервном адресе `workers.dev`. Публиковать сайт до успешной проверки обоих
+   адресов нельзя.
 
 6. Только после этого объединить pull request сайта. Merge публикует `site/` на
    `https://adv.zrt-school.ru`; draft PR production не меняет.
