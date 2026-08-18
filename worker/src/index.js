@@ -76,16 +76,6 @@ export default {
       return json({ ok: false, code: 'payload_too_large' }, 413, cors);
     }
 
-    const clientKey = request.headers.get('CF-Connecting-IP') || 'unknown';
-    const rateLimit = await env.RATE_LIMITER.limit({ key: clientKey });
-    if (!rateLimit.success) {
-      return json(
-        { ok: false, code: 'rate_limited' },
-        429,
-        { ...cors, 'Retry-After': String(RETRY_AFTER_SECONDS) }
-      );
-    }
-
     let rawPayload;
     try {
       const rawBody = await request.text();
@@ -115,6 +105,21 @@ export default {
 
     if (journal.state === 'unavailable') {
       return json({ ok: false, code: 'journal_unavailable' }, 503, cors);
+    }
+
+    const clientKey = request.headers.get('CF-Connecting-IP') || 'unknown';
+    const rateLimit = await env.RATE_LIMITER.limit({ key: clientKey });
+    if (!rateLimit.success) {
+      await markFailed(env.DB, payload.submissionId, journal.attemptNumber, 'rate_limited');
+      console.warn(JSON.stringify({
+        event: 'lead_rate_limited',
+        submission_id: payload.submissionId
+      }));
+      return json(
+        { ok: false, code: 'rate_limited' },
+        429,
+        { ...cors, 'Retry-After': String(RETRY_AFTER_SECONDS) }
+      );
     }
 
     if (!env.AMO_LONG_LIVED_TOKEN) {

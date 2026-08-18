@@ -9,10 +9,6 @@
     {
       "pattern": "adv.zrt-school.ru/statistics/api*",
       "zone_name": "zrt-school.ru"
-    },
-    {
-      "pattern": "api.zrt-school.ru",
-      "custom_domain": true
     }
   ],
   "observability": {

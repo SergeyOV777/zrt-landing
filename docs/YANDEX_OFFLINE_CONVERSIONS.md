@@ -70,11 +70,15 @@
    `/health` → 200, разрешённый preflight → 204, пустой payload → 400, чужой Origin
    → 403. Тестовую сделку для этих проверок создавать не нужно.
 4. Перевести новую версию на 100% и ещё раз выполнить четыре проверки.
-5. Подключить расписание повторов:
+5. Подключить расписание повторов и маршрут статистики:
 
    ```text
    npx wrangler triggers deploy --config worker/wrangler.jsonc
    ```
+
+   После команды проверить `/health` на боевом адресе `workers.dev`. Собственный
+   домен Worker не подключается, пока зона `zrt-school.ru` работает в Cloudflare
+   в режиме `paused`.
 
 6. Только после этого объединить pull request сайта. Merge публикует `site/` на
    `https://adv.zrt-school.ru`; draft PR production не меняет.
