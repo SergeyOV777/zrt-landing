@@ -6,11 +6,22 @@
       const tmr = window._tmr || (window._tmr = []);
       tmr.push({ type: 'reachGoal', id: counterId, goal });
     } catch (error) {
-      // Сбой рекламного пикселя не должен мешать переходу в мессенджер.
+      // Сбой рекламного пикселя не должен мешать действию пользователя.
     }
   }
 
   document.addEventListener('click', (event) => {
+    const scenarioTarget = event.target.closest('[data-scenario-select]');
+    const scenario = scenarioTarget?.dataset.scenarioSelect;
+    if (scenario === 'beginner') {
+      reachGoal('scenarioBeginner');
+      return;
+    }
+    if (scenario === 'experienced') {
+      reachGoal('scenarioExperienced');
+      return;
+    }
+
     const target = event.target.closest('a[href]');
     if (!target) return;
 
