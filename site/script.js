@@ -157,6 +157,15 @@ function showSubmissionError(error) {
   errorMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
+function sendVkLeadGoal() {
+  try {
+    const tmr = window._tmr || (window._tmr = []);
+    tmr.push({ type: 'reachGoal', id: 3788569, goal: 'leadSent' });
+  } catch (error) {
+    // Сбой рекламного пикселя не должен влиять на уже созданную заявку.
+  }
+}
+
 form?.addEventListener('submit', async (event) => {
   event.preventDefault();
 
@@ -218,6 +227,7 @@ form?.addEventListener('submit', async (event) => {
       scenario: body.dataset.scenario || 'beginner',
       contact_method: form.elements.contact.value
     });
+    sendVkLeadGoal();
     delete form.dataset.submissionId;
     form.reset();
     successMessage.hidden = false;
