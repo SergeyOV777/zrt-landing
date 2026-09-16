@@ -804,75 +804,136 @@ body[data-scenario="beginner"] .choice-button--beginner {
   font-weight: 600;
 }
 
-.bike-gallery {
-  width: min(calc(100% - 64px), 1380px);
-  margin: 72px auto 0;
+.bike-grid {
+  margin-top: 72px;
   display: grid;
-  grid-template-columns: 1.35fr 0.8fr 0.8fr;
-  gap: 10px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
 }
 
-.bike-gallery__item {
-  position: relative;
-  height: 520px;
-  margin: 0;
-  overflow: hidden;
-  background: #222;
-}
-
-.bike-gallery__item img {
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.6s cubic-bezier(.2,.7,.2,1);
-}
-
-.bike-gallery__item:first-child img {
-  object-position: 58% center;
-}
-
-.bike-gallery__item:nth-child(2) img {
-  object-position: 50% 48%;
-}
-
-.bike-gallery__item:hover img {
-  transform: scale(1.035);
-}
-
-.bike-gallery__item::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.18);
-  pointer-events: none;
-}
-
-.bike-gallery__item figcaption {
-  position: absolute;
-  z-index: 2;
-  right: 18px;
-  bottom: 18px;
-  left: 18px;
-  padding-top: 14px;
+.bike-card {
+  min-width: 0;
   display: flex;
-  justify-content: space-between;
-  gap: 14px;
+  flex-direction: column;
+  color: var(--ink);
+  background: #f5f4ef;
+  border: 1px solid rgba(17,17,17,0.2);
+}
+
+.bike-card__media {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #fff;
+  border-bottom: 1px solid rgba(17,17,17,0.16);
+}
+
+.bike-card__media img {
+  width: 100%;
+  height: 100%;
+  padding: 20px 14px 12px;
+  object-fit: contain;
+  transition: transform 0.45s cubic-bezier(.2,.7,.2,1);
+}
+
+.bike-card:hover .bike-card__media img {
+  transform: scale(1.045);
+}
+
+.bike-card__number {
+  position: absolute;
+  z-index: 1;
+  top: 13px;
+  left: 14px;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
   color: var(--white);
-  border-top: 1px solid rgba(255,255,255,0.6);
+  background: var(--ink);
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+.bike-card__body {
+  min-height: 190px;
+  padding: 22px 20px 25px;
+  display: flex;
+  flex-direction: column;
+}
+
+.bike-card__fit {
+  min-height: 25px;
+  margin: 0 0 16px;
+  color: #686760;
+  font-size: 9px;
+  font-weight: 800;
+  line-height: 1.4;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
-.bike-gallery__item figcaption span {
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
+.bike-card h3 {
+  margin: 0;
+  font-size: clamp(19px, 1.7vw, 25px);
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
 }
 
-.bike-gallery__item figcaption b {
-  font-size: 13px;
+.bike-card__body > p:last-child {
+  margin: 17px 0 0;
+  color: #5f5d57;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.motopark__enduro {
+  margin-top: 12px;
+  padding: 34px 38px 36px;
+  display: grid;
+  grid-template-columns: 0.35fr 0.75fr 1.3fr;
+  gap: 34px;
+  align-items: center;
+  color: var(--white);
+  background: var(--ink);
+}
+
+.motopark__enduro-label {
+  margin: 0;
+  color: var(--accent);
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.motopark__enduro h3 {
+  margin: 0;
+  font-size: clamp(19px, 2vw, 28px);
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+}
+
+.motopark__enduro > p:last-child {
+  margin: 0;
+  color: rgba(255,255,255,0.64);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.motopark__note {
+  margin: 20px 0 0;
+  color: rgba(17,17,17,0.63);
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.5;
 }
 
 .motopark__cta {
-  margin-top: 46px;
+  margin-top: 38px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -1738,12 +1799,8 @@ body[data-scenario="beginner"] .choice-button--beginner {
     height: 520px;
   }
 
-  .bike-gallery {
-    grid-template-columns: 1.2fr 0.8fr;
-  }
-
-  .bike-gallery__item:last-child {
-    display: none;
+  .bike-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .booking__layout {
@@ -1849,12 +1906,12 @@ body[data-scenario="beginner"] .choice-button--beginner {
     gap: 28px;
   }
 
-  .bike-gallery {
-    width: calc(100% - 36px);
+  .motopark__enduro {
+    grid-template-columns: 0.45fr 1fr;
   }
 
-  .bike-gallery__item {
-    height: 460px;
+  .motopark__enduro > p:last-child {
+    grid-column: 1 / -1;
   }
 
   .reviews-live {
@@ -2056,17 +2113,38 @@ body[data-scenario="beginner"] .choice-button--beginner {
     margin-top: 46px;
   }
 
-  .bike-gallery {
+  .bike-grid {
+    width: calc(100vw - 18px);
     margin-top: 52px;
+    padding: 0 18px 12px 0;
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(270px, 82vw);
+    gap: 10px;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scroll-snap-type: inline mandatory;
+    scrollbar-width: thin;
+    scrollbar-color: var(--ink) transparent;
+  }
+
+  .bike-card {
+    scroll-snap-align: start;
+  }
+
+  .bike-card__body {
+    min-height: 184px;
+  }
+
+  .motopark__enduro {
+    margin-top: 10px;
+    padding: 27px 24px 29px;
     grid-template-columns: 1fr;
+    gap: 13px;
   }
 
-  .bike-gallery__item {
-    height: 430px;
-  }
-
-  .bike-gallery__item:nth-child(2) {
-    display: none;
+  .motopark__enduro > p:last-child {
+    grid-column: auto;
   }
 
   .reviews-live {
