@@ -71,22 +71,27 @@ _tmr.push({id: "3788569", type: "pageView", start: (new Date()).getTime()});
         <h1 id="hero-title">Раз зашёл снова —<br><em>значит зацепило</em></h1>
         <p class="hero__lead">Обычно так откладывают спортзал, английский и отпуск.<br>Но это всего один заезд.</p>
 
-        <div class="hero__choice" aria-label="Выберите свой опыт">
+        <div class="hero__choice-intro">
+          <p>Какой у тебя опыт?</p>
+          <span>Выбери вариант — покажем подходящую тренировку</span>
+        </div>
+
+        <div class="hero__choice" aria-label="Выберите опыт — страница покажет подходящую тренировку">
           <button class="choice-button choice-button--beginner is-active" type="button" data-scenario-select="beginner" aria-pressed="true">
             <span class="choice-button__dot"></span>
-            Я новичок
-            <span aria-hidden="true">↘</span>
+            <span class="choice-button__copy"><strong>Еду впервые</strong><small>Показать программу</small></span>
+            <span aria-hidden="true">↓</span>
           </button>
           <button class="choice-button choice-button--experienced" type="button" data-scenario-select="experienced" aria-pressed="false">
             <span class="choice-button__dot"></span>
-            Я уже катал
-            <span aria-hidden="true">↘</span>
+            <span class="choice-button__copy"><strong>Уже катался</strong><small>Показать программу</small></span>
+            <span aria-hidden="true">↓</span>
           </button>
         </div>
 
         <p class="hero__discount"><span>−1000 ₽</span> Скидка на первое занятие никуда не делась</p>
       </div>
-      <a class="hero__scroll" href="#scenario"><span></span> Листай к своему сценарию</a>
+      <a class="hero__scroll" href="#scenario"><span></span> Ниже — программа по твоему уровню</a>
     </section>
 
     <section class="scenario section" id="scenario" aria-label="Сценарий тренировки">
@@ -94,8 +99,8 @@ _tmr.push({id: "3788569", type: "pageView", start: (new Date()).getTime()});
         <div class="section-topline">
           <p class="section-index">02 / ВЫБЕРИ СВОЙ ТЕМП</p>
           <div class="scenario-tabs" aria-label="Переключить сценарий">
-            <button type="button" data-scenario-select="beginner" class="is-active" aria-pressed="true">Новичок</button>
-            <button type="button" data-scenario-select="experienced" aria-pressed="false">Уже катал</button>
+            <button type="button" data-scenario-select="beginner" class="is-active" aria-pressed="true">Первый раз</button>
+            <button type="button" data-scenario-select="experienced" aria-pressed="false">Уже катался</button>
           </div>
         </div>
 

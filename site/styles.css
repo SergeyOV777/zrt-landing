@@ -289,16 +289,37 @@ h2 em {
   color: rgba(255,255,255,0.82);
 }
 
+.hero__choice-intro {
+  margin: 30px auto 0;
+  color: var(--white);
+}
+
+.hero__choice-intro p {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.hero__choice-intro span {
+  display: block;
+  margin-top: 6px;
+  color: rgba(255,255,255,0.68);
+  font-size: 11px;
+  line-height: 1.45;
+}
+
 .hero__choice {
   display: flex;
   justify-content: center;
   gap: 10px;
-  margin-top: 38px;
+  margin-top: 14px;
 }
 
 .choice-button {
   min-width: 230px;
-  min-height: 62px;
+  min-height: 70px;
   padding: 0 22px;
   display: grid;
   grid-template-columns: 12px 1fr auto;
@@ -310,6 +331,28 @@ h2 em {
   letter-spacing: 0.05em;
   text-transform: uppercase;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.choice-button__copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  text-align: left;
+}
+
+.choice-button__copy strong {
+  font-size: 13px;
+  line-height: 1.1;
+}
+
+.choice-button__copy small {
+  font-size: 8px;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: 0.06em;
+  opacity: 0.66;
+  text-transform: uppercase;
 }
 
 .choice-button:hover,
@@ -2051,14 +2094,27 @@ body[data-scenario="beginner"] .choice-button--beginner {
     display: none;
   }
 
+  .hero__choice-intro {
+    max-width: 310px;
+    margin-top: 24px;
+  }
+
+  .hero__choice-intro p {
+    font-size: 11px;
+  }
+
+  .hero__choice-intro span {
+    font-size: 10px;
+  }
+
   .hero__choice {
-    margin-top: 30px;
+    margin-top: 12px;
     display: grid;
   }
 
   .choice-button {
     width: min(100%, 330px);
-    min-height: 56px;
+    min-height: 64px;
   }
 
   .hero__discount {
