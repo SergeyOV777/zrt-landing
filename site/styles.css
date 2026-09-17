@@ -890,7 +890,7 @@ body[data-scenario="beginner"] .choice-button--beginner {
 }
 
 .motopark__enduro {
-  margin-top: 12px;
+  margin-top: 72px;
   padding: 34px 38px 36px;
   display: grid;
   grid-template-columns: 0.35fr 0.75fr 1.3fr;
@@ -922,6 +922,11 @@ body[data-scenario="beginner"] .choice-button--beginner {
   color: rgba(255,255,255,0.64);
   font-size: 12px;
   line-height: 1.7;
+}
+
+.bike-grid--enduro {
+  margin-top: 12px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .motopark__note {
