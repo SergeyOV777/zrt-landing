@@ -144,6 +144,22 @@ button {
   color: rgba(255,255,255,0.62);
 }
 
+.header-location-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding-bottom: 4px;
+  color: rgba(255,255,255,0.72);
+  border-bottom: 1px dashed rgba(255,255,255,0.35);
+  white-space: nowrap;
+}
+
+.header-location-link span {
+  color: var(--accent);
+  font-size: 12px;
+  line-height: 1;
+}
+
 .header-section-link {
   display: inline-flex;
   align-items: center;
@@ -2350,7 +2366,7 @@ body[data-scenario="beginner"] .choice-button--beginner {
     left: 24px;
     height: 38px;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
     align-items: center;
     color: rgba(255,255,255,0.86);
     border-bottom: 1px solid rgba(255,255,255,0.18);
@@ -2364,7 +2380,8 @@ body[data-scenario="beginner"] .choice-button--beginner {
     height: 100%;
     display: flex;
     align-items: center;
-    gap: 9px;
+    justify-content: center;
+    gap: 6px;
   }
 
   .header-quicklinks-mobile a + a {
@@ -2373,7 +2390,6 @@ body[data-scenario="beginner"] .choice-button--beginner {
   }
 
   .header-quicklinks-mobile span {
-    margin-left: auto;
     color: var(--accent);
     font-size: 14px;
   }
@@ -2469,7 +2485,7 @@ body[data-scenario="beginner"] .choice-button--beginner {
   }
 
   .header-quicklinks-mobile a + a {
-    padding-left: 12px;
+    padding-left: 8px;
   }
 }
 
