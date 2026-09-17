@@ -144,7 +144,7 @@ button {
   color: rgba(255,255,255,0.62);
 }
 
-.header-reviews-link {
+.header-section-link {
   display: inline-flex;
   align-items: center;
   gap: 9px;
@@ -156,15 +156,15 @@ button {
   white-space: nowrap;
 }
 
-.header-reviews-link i,
-.header-reviews-mobile i {
+.header-section-link i,
+.header-quicklinks-mobile i {
   width: 13px;
   height: 2px;
   flex: 0 0 auto;
   background: var(--accent);
 }
 
-.header-reviews-mobile {
+.header-quicklinks-mobile {
   display: none;
 }
 
@@ -2234,15 +2234,15 @@ body[data-scenario="beginner"] .choice-button--beginner {
 }
 
 @media (max-width: 1050px) {
-  .header-reviews-mobile {
+  .header-quicklinks-mobile {
     position: absolute;
     top: var(--header-h);
     right: 24px;
     left: 24px;
     height: 38px;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     align-items: center;
-    gap: 9px;
     color: rgba(255,255,255,0.86);
     border-bottom: 1px solid rgba(255,255,255,0.18);
     font-size: 9px;
@@ -2251,7 +2251,19 @@ body[data-scenario="beginner"] .choice-button--beginner {
     text-transform: uppercase;
   }
 
-  .header-reviews-mobile span {
+  .header-quicklinks-mobile a {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+  }
+
+  .header-quicklinks-mobile a + a {
+    padding-left: 18px;
+    border-left: 1px solid rgba(255,255,255,0.18);
+  }
+
+  .header-quicklinks-mobile span {
     margin-left: auto;
     color: var(--accent);
     font-size: 14px;
@@ -2342,9 +2354,13 @@ body[data-scenario="beginner"] .choice-button--beginner {
     height: 28px;
   }
 
-  .header-reviews-mobile {
+  .header-quicklinks-mobile {
     right: 18px;
     left: 18px;
+  }
+
+  .header-quicklinks-mobile a + a {
+    padding-left: 12px;
   }
 }
 
