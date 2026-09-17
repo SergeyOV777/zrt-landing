@@ -472,6 +472,49 @@ body[data-scenario="beginner"] .choice-button--beginner {
   background: var(--accent);
 }
 
+.proof-strip {
+  color: var(--white);
+  background: var(--ink);
+  border-top: 1px solid rgba(255,255,255,0.14);
+  border-bottom: 1px solid rgba(255,255,255,0.14);
+}
+
+.proof-strip__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.proof-strip p {
+  min-width: 0;
+  margin: 0;
+  padding: 28px clamp(22px, 3vw, 46px);
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.proof-strip p + p {
+  border-left: 1px solid rgba(255,255,255,0.14);
+}
+
+.proof-strip strong {
+  color: var(--accent);
+  font-size: clamp(20px, 2vw, 30px);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+}
+
+.proof-strip span {
+  color: rgba(255,255,255,0.68);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
 .section-topline {
   min-height: 42px;
   padding-bottom: 18px;
@@ -2141,6 +2184,26 @@ body[data-scenario="beginner"] .choice-button--beginner {
 
   .hero__scroll {
     bottom: 17px;
+  }
+
+  .proof-strip {
+    width: 100%;
+  }
+
+  .proof-strip p {
+    padding: 20px 9px;
+    gap: 6px;
+    text-align: center;
+  }
+
+  .proof-strip strong {
+    font-size: clamp(14px, 4vw, 18px);
+    line-height: 1.05;
+  }
+
+  .proof-strip span {
+    font-size: 7px;
+    letter-spacing: 0.06em;
   }
 
   .section-topline {
