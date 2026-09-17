@@ -144,7 +144,23 @@ button {
   color: rgba(255,255,255,0.62);
 }
 
-.header-reviews-link {
+.header-location-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding-bottom: 4px;
+  color: rgba(255,255,255,0.72);
+  border-bottom: 1px dashed rgba(255,255,255,0.35);
+  white-space: nowrap;
+}
+
+.header-location-link span {
+  color: var(--accent);
+  font-size: 12px;
+  line-height: 1;
+}
+
+.header-section-link {
   display: inline-flex;
   align-items: center;
   gap: 9px;
@@ -156,15 +172,15 @@ button {
   white-space: nowrap;
 }
 
-.header-reviews-link i,
-.header-reviews-mobile i {
+.header-section-link i,
+.header-quicklinks-mobile i {
   width: 13px;
   height: 2px;
   flex: 0 0 auto;
   background: var(--accent);
 }
 
-.header-reviews-mobile {
+.header-quicklinks-mobile {
   display: none;
 }
 
@@ -289,16 +305,37 @@ h2 em {
   color: rgba(255,255,255,0.82);
 }
 
+.hero__choice-intro {
+  margin: 30px auto 0;
+  color: var(--white);
+}
+
+.hero__choice-intro p {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.hero__choice-intro span {
+  display: block;
+  margin-top: 6px;
+  color: rgba(255,255,255,0.68);
+  font-size: 11px;
+  line-height: 1.45;
+}
+
 .hero__choice {
   display: flex;
   justify-content: center;
   gap: 10px;
-  margin-top: 38px;
+  margin-top: 14px;
 }
 
 .choice-button {
   min-width: 230px;
-  min-height: 62px;
+  min-height: 70px;
   padding: 0 22px;
   display: grid;
   grid-template-columns: 12px 1fr auto;
@@ -310,6 +347,28 @@ h2 em {
   letter-spacing: 0.05em;
   text-transform: uppercase;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.choice-button__copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  text-align: left;
+}
+
+.choice-button__copy strong {
+  font-size: 13px;
+  line-height: 1.1;
+}
+
+.choice-button__copy small {
+  font-size: 8px;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: 0.06em;
+  opacity: 0.66;
+  text-transform: uppercase;
 }
 
 .choice-button:hover,
@@ -411,6 +470,49 @@ body[data-scenario="beginner"] .choice-button--beginner {
   width: 1px;
   height: 22px;
   background: var(--accent);
+}
+
+.proof-strip {
+  color: var(--white);
+  background: var(--ink);
+  border-top: 1px solid rgba(255,255,255,0.14);
+  border-bottom: 1px solid rgba(255,255,255,0.14);
+}
+
+.proof-strip__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.proof-strip p {
+  min-width: 0;
+  margin: 0;
+  padding: 28px clamp(22px, 3vw, 46px);
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.proof-strip p + p {
+  border-left: 1px solid rgba(255,255,255,0.14);
+}
+
+.proof-strip strong {
+  color: var(--accent);
+  font-size: clamp(20px, 2vw, 30px);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+}
+
+.proof-strip span {
+  color: rgba(255,255,255,0.68);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  line-height: 1.35;
+  text-transform: uppercase;
 }
 
 .section-topline {
@@ -804,75 +906,141 @@ body[data-scenario="beginner"] .choice-button--beginner {
   font-weight: 600;
 }
 
-.bike-gallery {
-  width: min(calc(100% - 64px), 1380px);
-  margin: 72px auto 0;
+.bike-grid {
+  margin-top: 72px;
   display: grid;
-  grid-template-columns: 1.35fr 0.8fr 0.8fr;
-  gap: 10px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
 }
 
-.bike-gallery__item {
-  position: relative;
-  height: 520px;
-  margin: 0;
-  overflow: hidden;
-  background: #222;
-}
-
-.bike-gallery__item img {
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.6s cubic-bezier(.2,.7,.2,1);
-}
-
-.bike-gallery__item:first-child img {
-  object-position: 58% center;
-}
-
-.bike-gallery__item:nth-child(2) img {
-  object-position: 50% 48%;
-}
-
-.bike-gallery__item:hover img {
-  transform: scale(1.035);
-}
-
-.bike-gallery__item::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.18);
-  pointer-events: none;
-}
-
-.bike-gallery__item figcaption {
-  position: absolute;
-  z-index: 2;
-  right: 18px;
-  bottom: 18px;
-  left: 18px;
-  padding-top: 14px;
+.bike-card {
+  min-width: 0;
   display: flex;
-  justify-content: space-between;
-  gap: 14px;
+  flex-direction: column;
+  color: var(--ink);
+  background: #f5f4ef;
+  border: 1px solid rgba(17,17,17,0.2);
+}
+
+.bike-card__media {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #fff;
+  border-bottom: 1px solid rgba(17,17,17,0.16);
+}
+
+.bike-card__media img {
+  width: 100%;
+  height: 100%;
+  padding: 20px 14px 12px;
+  object-fit: contain;
+  transition: transform 0.45s cubic-bezier(.2,.7,.2,1);
+}
+
+.bike-card:hover .bike-card__media img {
+  transform: scale(1.045);
+}
+
+.bike-card__number {
+  position: absolute;
+  z-index: 1;
+  top: 13px;
+  left: 14px;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
   color: var(--white);
-  border-top: 1px solid rgba(255,255,255,0.6);
+  background: var(--ink);
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+.bike-card__body {
+  min-height: 190px;
+  padding: 22px 20px 25px;
+  display: flex;
+  flex-direction: column;
+}
+
+.bike-card__fit {
+  min-height: 25px;
+  margin: 0 0 16px;
+  color: #686760;
+  font-size: 9px;
+  font-weight: 800;
+  line-height: 1.4;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
-.bike-gallery__item figcaption span {
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
+.bike-card h3 {
+  margin: 0;
+  font-size: clamp(19px, 1.7vw, 25px);
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
 }
 
-.bike-gallery__item figcaption b {
-  font-size: 13px;
+.bike-card__body > p:last-child {
+  margin: 17px 0 0;
+  color: #5f5d57;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.motopark__enduro {
+  margin-top: 72px;
+  padding: 34px 38px 36px;
+  display: grid;
+  grid-template-columns: 0.35fr 0.75fr 1.3fr;
+  gap: 34px;
+  align-items: center;
+  color: var(--white);
+  background: var(--ink);
+}
+
+.motopark__enduro-label {
+  margin: 0;
+  color: var(--accent);
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.motopark__enduro h3 {
+  margin: 0;
+  font-size: clamp(19px, 2vw, 28px);
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+}
+
+.motopark__enduro > p:last-child {
+  margin: 0;
+  color: rgba(255,255,255,0.64);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.bike-grid--enduro {
+  margin-top: 12px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.motopark__note {
+  margin: 20px 0 0;
+  color: rgba(17,17,17,0.63);
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.5;
 }
 
 .motopark__cta {
-  margin-top: 46px;
+  margin-top: 38px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -1700,6 +1868,59 @@ body[data-scenario="beginner"] .choice-button--beginner {
   height: 35px;
 }
 
+.back-to-top {
+  position: fixed;
+  z-index: 9998;
+  right: 20px;
+  bottom: 92px;
+  width: 58px;
+  height: 58px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  color: var(--accent-ink);
+  background: var(--accent);
+  border: 1px solid rgba(17,17,17,0.25);
+  box-shadow: 0 12px 28px rgba(17,17,17,0.18);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(12px);
+  transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease, background-color 0.2s ease;
+}
+
+.back-to-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.back-to-top:hover,
+.back-to-top:focus-visible {
+  transform: translateY(-3px);
+}
+
+.back-to-top:focus-visible {
+  outline: 3px solid var(--white);
+  outline-offset: 3px;
+}
+
+.back-to-top span {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.back-to-top strong {
+  font-size: 8px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 @keyframes hero-in {
   from { opacity: 0; transform: scale(1.08); }
   to { opacity: 1; transform: scale(1.015); }
@@ -1738,12 +1959,8 @@ body[data-scenario="beginner"] .choice-button--beginner {
     height: 520px;
   }
 
-  .bike-gallery {
-    grid-template-columns: 1.2fr 0.8fr;
-  }
-
-  .bike-gallery__item:last-child {
-    display: none;
+  .bike-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .booking__layout {
@@ -1849,12 +2066,12 @@ body[data-scenario="beginner"] .choice-button--beginner {
     gap: 28px;
   }
 
-  .bike-gallery {
-    width: calc(100% - 36px);
+  .motopark__enduro {
+    grid-template-columns: 0.45fr 1fr;
   }
 
-  .bike-gallery__item {
-    height: 460px;
+  .motopark__enduro > p:last-child {
+    grid-column: 1 / -1;
   }
 
   .reviews-live {
@@ -1936,14 +2153,27 @@ body[data-scenario="beginner"] .choice-button--beginner {
     display: none;
   }
 
+  .hero__choice-intro {
+    max-width: 310px;
+    margin-top: 24px;
+  }
+
+  .hero__choice-intro p {
+    font-size: 11px;
+  }
+
+  .hero__choice-intro span {
+    font-size: 10px;
+  }
+
   .hero__choice {
-    margin-top: 30px;
+    margin-top: 12px;
     display: grid;
   }
 
   .choice-button {
     width: min(100%, 330px);
-    min-height: 56px;
+    min-height: 64px;
   }
 
   .hero__discount {
@@ -1954,6 +2184,26 @@ body[data-scenario="beginner"] .choice-button--beginner {
 
   .hero__scroll {
     bottom: 17px;
+  }
+
+  .proof-strip {
+    width: 100%;
+  }
+
+  .proof-strip p {
+    padding: 20px 9px;
+    gap: 6px;
+    text-align: center;
+  }
+
+  .proof-strip strong {
+    font-size: clamp(14px, 4vw, 18px);
+    line-height: 1.05;
+  }
+
+  .proof-strip span {
+    font-size: 7px;
+    letter-spacing: 0.06em;
   }
 
   .section-topline {
@@ -2056,17 +2306,38 @@ body[data-scenario="beginner"] .choice-button--beginner {
     margin-top: 46px;
   }
 
-  .bike-gallery {
+  .bike-grid {
+    width: calc(100vw - 18px);
     margin-top: 52px;
+    padding: 0 18px 12px 0;
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(270px, 82vw);
+    gap: 10px;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scroll-snap-type: inline mandatory;
+    scrollbar-width: thin;
+    scrollbar-color: var(--ink) transparent;
+  }
+
+  .bike-card {
+    scroll-snap-align: start;
+  }
+
+  .bike-card__body {
+    min-height: 184px;
+  }
+
+  .motopark__enduro {
+    margin-top: 10px;
+    padding: 27px 24px 29px;
     grid-template-columns: 1fr;
+    gap: 13px;
   }
 
-  .bike-gallery__item {
-    height: 430px;
-  }
-
-  .bike-gallery__item:nth-child(2) {
-    display: none;
+  .motopark__enduro > p:last-child {
+    grid-column: auto;
   }
 
   .reviews-live {
@@ -2151,15 +2422,15 @@ body[data-scenario="beginner"] .choice-button--beginner {
 }
 
 @media (max-width: 1050px) {
-  .header-reviews-mobile {
+  .header-quicklinks-mobile {
     position: absolute;
     top: var(--header-h);
     right: 24px;
     left: 24px;
     height: 38px;
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     align-items: center;
-    gap: 9px;
     color: rgba(255,255,255,0.86);
     border-bottom: 1px solid rgba(255,255,255,0.18);
     font-size: 9px;
@@ -2168,8 +2439,20 @@ body[data-scenario="beginner"] .choice-button--beginner {
     text-transform: uppercase;
   }
 
-  .header-reviews-mobile span {
-    margin-left: auto;
+  .header-quicklinks-mobile a {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .header-quicklinks-mobile a + a {
+    padding-left: 18px;
+    border-left: 1px solid rgba(255,255,255,0.18);
+  }
+
+  .header-quicklinks-mobile span {
     color: var(--accent);
     font-size: 14px;
   }
@@ -2259,9 +2542,13 @@ body[data-scenario="beginner"] .choice-button--beginner {
     height: 28px;
   }
 
-  .header-reviews-mobile {
+  .header-quicklinks-mobile {
     right: 18px;
     left: 18px;
+  }
+
+  .header-quicklinks-mobile a + a {
+    padding-left: 8px;
   }
 }
 
@@ -2295,6 +2582,13 @@ body[data-scenario="beginner"] .choice-button--beginner {
   .messenger-float__button--max img {
     width: 33px;
     height: 33px;
+  }
+
+  .back-to-top {
+    right: 14px;
+    bottom: 80px;
+    width: 50px;
+    height: 50px;
   }
 }
 

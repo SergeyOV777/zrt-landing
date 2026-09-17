@@ -46,12 +46,17 @@ _tmr.push({id: "3788569", type: "pageView", start: (new Date()).getTime()});
       <img class="logo__image" src="assets/zrt-logo.png" alt="">
     </a>
     <div class="site-header__meta">
-      <span>Москва · Брёхово</span>
+      <a class="header-location-link" href="#location">Москва · Брёхово <span aria-hidden="true">↓</span></a>
       <a href="tel:+74996459926">+7 499 645-99-26</a>
-      <a class="header-reviews-link" href="#reviews"><i aria-hidden="true"></i>Что говорят после заезда</a>
+      <a class="header-section-link" href="#motopark"><i aria-hidden="true"></i>Мотопарк</a>
+      <a class="header-section-link" href="#reviews">Что говорят после заезда</a>
     </div>
     <a class="header-cta" href="#booking">Записаться <span aria-hidden="true">↘</span></a>
-    <a class="header-reviews-mobile" href="#reviews"><i aria-hidden="true"></i>Что говорят после заезда <span aria-hidden="true">↓</span></a>
+    <nav class="header-quicklinks-mobile" aria-label="Быстрые ссылки">
+      <a href="#motopark">Мотопарк <span aria-hidden="true">↓</span></a>
+      <a href="#reviews" aria-label="Что говорят после заезда">Отзывы <span aria-hidden="true">↓</span></a>
+      <a href="#location" aria-label="Москва, Брёхово — карта проезда">Адрес <span aria-hidden="true">↓</span></a>
+    </nav>
   </header>
 
   <main>
@@ -67,22 +72,35 @@ _tmr.push({id: "3788569", type: "pageView", start: (new Date()).getTime()});
         <h1 id="hero-title">Раз зашёл снова —<br><em>значит зацепило</em></h1>
         <p class="hero__lead">Обычно так откладывают спортзал, английский и отпуск.<br>Но это всего один заезд.</p>
 
-        <div class="hero__choice" aria-label="Выберите свой опыт">
+        <div class="hero__choice-intro">
+          <p>Какой у тебя опыт?</p>
+          <span>Выбери вариант — покажем подходящую тренировку</span>
+        </div>
+
+        <div class="hero__choice" aria-label="Выберите опыт — страница покажет подходящую тренировку">
           <button class="choice-button choice-button--beginner is-active" type="button" data-scenario-select="beginner" aria-pressed="true">
             <span class="choice-button__dot"></span>
-            Я новичок
-            <span aria-hidden="true">↘</span>
+            <span class="choice-button__copy"><strong>Еду впервые</strong><small>Показать программу</small></span>
+            <span aria-hidden="true">↓</span>
           </button>
           <button class="choice-button choice-button--experienced" type="button" data-scenario-select="experienced" aria-pressed="false">
             <span class="choice-button__dot"></span>
-            Я уже катал
-            <span aria-hidden="true">↘</span>
+            <span class="choice-button__copy"><strong>Уже катался</strong><small>Показать программу</small></span>
+            <span aria-hidden="true">↓</span>
           </button>
         </div>
 
         <p class="hero__discount"><span>−1000 ₽</span> Скидка на первое занятие никуда не делась</p>
       </div>
-      <a class="hero__scroll" href="#scenario"><span></span> Листай к своему сценарию</a>
+      <a class="hero__scroll" href="#scenario"><span></span> Ниже — программа по твоему уровню</a>
+    </section>
+
+    <section class="proof-strip" aria-label="ZRT в цифрах">
+      <div class="container proof-strip__grid">
+        <p><strong>С мая 2015 года</strong><span>мы работаем</span></p>
+        <p><strong>30 000+ человек</strong><span>тренировались в ZRT</span></p>
+        <p><strong>100 000+ занятий</strong><span>провели наши тренеры</span></p>
+      </div>
     </section>
 
     <section class="scenario section" id="scenario" aria-label="Сценарий тренировки">
@@ -90,8 +108,8 @@ _tmr.push({id: "3788569", type: "pageView", start: (new Date()).getTime()});
         <div class="section-topline">
           <p class="section-index">02 / ВЫБЕРИ СВОЙ ТЕМП</p>
           <div class="scenario-tabs" aria-label="Переключить сценарий">
-            <button type="button" data-scenario-select="beginner" class="is-active" aria-pressed="true">Новичок</button>
-            <button type="button" data-scenario-select="experienced" aria-pressed="false">Уже катал</button>
+            <button type="button" data-scenario-select="beginner" class="is-active" aria-pressed="true">Первый раз</button>
+            <button type="button" data-scenario-select="experienced" aria-pressed="false">Уже катался</button>
           </div>
         </div>
 
@@ -190,38 +208,203 @@ _tmr.push({id: "3788569", type: "pageView", start: (new Date()).getTime()});
       </div>
     </section>
 
-    <section class="motopark section" id="motopark" aria-labelledby="motopark-title">
-      <div class="container">
-        <div class="section-topline">
-          <p class="section-index">04 / МОТОПАРК</p>
-          <p class="section-caption">Япония · Европа · Китай</p>
-        </div>
-        <div class="motopark__intro">
-          <h2 id="motopark-title">Вот на чём<br><em>ты поедешь</em></h2>
-          <p>Подбираем мотоцикл под твой рост и уровень.<br>Новичку — лёгкий и понятный.<br>Опытному — бодрый и живой.</p>
-        </div>
-      </div>
+      <section class="motopark section" id="motopark" aria-labelledby="motopark-title">
+        <div class="container">
+          <div class="section-topline">
+            <p class="section-index">04 / МОТОПАРК</p>
+            <p class="section-caption">15+ мотоциклов · 50–250 см³</p>
+          </div>
+          <div class="motopark__intro">
+            <h2 id="motopark-title">Вот на чём<br><em>ты поедешь</em></h2>
+            <p>В парке есть спокойная техника для первого старта и полноразмерные байки для тех, кто уже ездит. Перед занятием тренер подберёт мотоцикл по росту, опыту и задаче.</p>
+          </div>
 
-      <div class="bike-gallery" aria-label="Фотографии мотопарка">
-        <figure class="bike-gallery__item bike-gallery__item--wide">
-          <img src="assets/three-riders.jpg" alt="Три райдера рядом с мотоциклами ZRT">
-          <figcaption><span>Для любого уровня</span><b>50–300 см³</b></figcaption>
-        </figure>
-        <figure class="bike-gallery__item">
-          <img src="assets/two-riders.jpg" alt="Два райдера на кроссовых мотоциклах">
-          <figcaption><span>Под рост</span><b>от 4 лет</b></figcaption>
-        </figure>
-        <figure class="bike-gallery__item">
-          <img src="assets/riders-lineup.jpg" alt="Райдеры и мотоциклы на летней трассе">
-          <figcaption><span>Под задачу</span><b>15+ байков</b></figcaption>
-        </figure>
-      </div>
+          <div class="bike-grid" aria-label="Мотоциклы ZRT">
+            <article class="bike-card">
+              <div class="bike-card__media">
+                <span class="bike-card__number" aria-hidden="true">01</span>
+                <img src="assets/motopark/honda-crf-50.jpg" width="1024" height="768" loading="lazy" decoding="async" alt="Красный Honda CRF 50 из мотопарка ZRT">
+              </div>
+              <div class="bike-card__body">
+                <p class="bike-card__fit">4–7 лет · первый старт</p>
+                <h3>Honda CRF 50</h3>
+                <p>Компактный мотоцикл с плавным газом и ограничителем скорости.</p>
+              </div>
+            </article>
 
-      <div class="container motopark__cta">
-        <p><strong>Мотоцикл, экипировка и тренер</strong><br>уже входят в занятие.</p>
-        <a class="button button--dark" href="#booking">Он тебя уже ждёт <span aria-hidden="true">↗</span></a>
-      </div>
-    </section>
+            <article class="bike-card">
+              <div class="bike-card__media">
+                <span class="bike-card__number" aria-hidden="true">02</span>
+                <img src="assets/motopark/kawasaki-kx-65.jpg" width="533" height="400" loading="lazy" decoding="async" alt="Зелёный Kawasaki KX 65 из мотопарка ZRT">
+              </div>
+              <div class="bike-card__body">
+                <p class="bike-card__fit">7–10 лет · база кросса</p>
+                <h3>Kawasaki KX 65</h3>
+                <p>Лёгкий 65 см³, но уже по-настоящему кроссовый мотоцикл.</p>
+              </div>
+            </article>
+
+            <article class="bike-card">
+              <div class="bike-card__media">
+                <span class="bike-card__number" aria-hidden="true">03</span>
+                <img src="assets/motopark/kawasaki-kx-85.jpg" width="700" height="467" loading="lazy" decoding="async" alt="Зелёный Kawasaki KX 85 из мотопарка ZRT">
+              </div>
+              <div class="bike-card__body">
+                <p class="bike-card__fit">10–13 лет · следующий уровень</p>
+                <h3>Kawasaki KX 85</h3>
+                <p>Близок к полноразмерной технике: мощный, лёгкий и манёвренный.</p>
+              </div>
+            </article>
+
+            <article class="bike-card">
+              <div class="bike-card__media">
+                <span class="bike-card__number" aria-hidden="true">04</span>
+                <img src="assets/motopark/yamaha-ttr-110.jpg" width="900" height="675" loading="lazy" decoding="async" alt="Синий Yamaha TTR 110 из мотопарка ZRT">
+              </div>
+              <div class="bike-card__body">
+                <p class="bike-card__fit">Рост 120–155 см · новичок</p>
+                <h3>Yamaha TTR 110</h3>
+                <p>Четырёхтактный двигатель и полуавтомат — удобно знакомиться с управлением.</p>
+              </div>
+            </article>
+
+            <article class="bike-card">
+              <div class="bike-card__media">
+                <span class="bike-card__number" aria-hidden="true">05</span>
+                <img src="assets/motopark/yamaha-ttr-125.jpg" width="700" height="467" loading="lazy" decoding="async" alt="Синий Yamaha TTR 125 из мотопарка ZRT">
+              </div>
+              <div class="bike-card__body">
+                <p class="bike-card__fit">Подростки и невысокие взрослые</p>
+                <h3>Yamaha TTR 125</h3>
+                <p>Понятный вариант для первых серьёзных шагов на трассе.</p>
+              </div>
+            </article>
+
+            <article class="bike-card">
+              <div class="bike-card__media">
+                <span class="bike-card__number" aria-hidden="true">06</span>
+                <img src="assets/motopark/yamaha-yz-125.jpg" width="700" height="467" loading="lazy" decoding="async" alt="Синий Yamaha YZ 125 из мотопарка ZRT">
+              </div>
+              <div class="bike-card__body">
+                <p class="bike-card__fit">От 14 лет и взрослые · динамика</p>
+                <h3>Yamaha YZ 125</h3>
+                <p>Лёгкий полноразмерный мотоцикл с точной управляемостью.</p>
+              </div>
+            </article>
+
+            <article class="bike-card">
+              <div class="bike-card__media">
+                <span class="bike-card__number" aria-hidden="true">07</span>
+                <img src="assets/motopark/ktm-sx-125.jpg" width="837" height="559" loading="lazy" decoding="async" alt="Оранжевый KTM SX 125 из мотопарка ZRT">
+              </div>
+              <div class="bike-card__body">
+                <p class="bike-card__fit">От 14 лет и взрослые · опыт есть</p>
+                <h3>KTM SX 125</h3>
+                <p>Мощный мотор и эффективные тормоза для более уверенного темпа.</p>
+              </div>
+            </article>
+
+            <article class="bike-card">
+              <div class="bike-card__media">
+                <span class="bike-card__number" aria-hidden="true">08</span>
+                <img src="assets/motopark/kawasaki-kx-250.jpg" width="700" height="467" loading="lazy" decoding="async" alt="Зелёный Kawasaki KX 250 из мотопарка ZRT">
+              </div>
+              <div class="bike-card__body">
+                <p class="bike-card__fit">Взрослые · уверенный уровень</p>
+                <h3>Kawasaki KX 250</h3>
+                <p>Полноразмерный спортивный мотоцикл для тех, кто уже освоил базу.</p>
+              </div>
+            </article>
+          </div>
+
+          <div class="motopark__enduro">
+            <p class="motopark__enduro-label">Лес / эндуро</p>
+            <h3>На чём едем в лес</h3>
+            <p>Три Kayo Mini для юных райдеров, лёгкий Kayo 125 для первых шагов и полноразмерные Kews для более уверенного катания.</p>
+          </div>
+
+          <div class="bike-grid bike-grid--enduro" aria-label="Эндуро-мотоциклы ZRT">
+            <article class="bike-card">
+              <div class="bike-card__media">
+                <span class="bike-card__number" aria-hidden="true">09</span>
+                <img src="assets/motopark/kayo-mini-60.jpg" width="800" height="600" loading="lazy" decoding="async" alt="Kayo Mini 60 из эндуро-парка ZRT">
+              </div>
+              <div class="bike-card__body">
+                <p class="bike-card__fit">Юным райдерам · компактный</p>
+                <h3>Kayo Mini 60</h3>
+                <p>Самая компактная модель в линейке Kayo Mini.</p>
+              </div>
+            </article>
+
+            <article class="bike-card">
+              <div class="bike-card__media">
+                <span class="bike-card__number" aria-hidden="true">10</span>
+                <img src="assets/motopark/kayo-mini-90.jpg" width="800" height="600" loading="lazy" decoding="async" alt="Kayo Mini 90 из эндуро-парка ZRT">
+              </div>
+              <div class="bike-card__body">
+                <p class="bike-card__fit">Юным райдерам · средний размер</p>
+                <h3>Kayo Mini 90</h3>
+                <p>Средняя модель в линейке компактных Kayo Mini.</p>
+              </div>
+            </article>
+
+            <article class="bike-card">
+              <div class="bike-card__media">
+                <span class="bike-card__number" aria-hidden="true">11</span>
+                <img src="assets/motopark/kayo-mini-125.jpg" width="800" height="600" loading="lazy" decoding="async" alt="Kayo Mini 125 из эндуро-парка ZRT">
+              </div>
+              <div class="bike-card__body">
+                <p class="bike-card__fit">Юным райдерам · старшая модель</p>
+                <h3>Kayo Mini 125</h3>
+                <p>Старшая модель в линейке компактных Kayo Mini.</p>
+              </div>
+            </article>
+
+            <article class="bike-card">
+              <div class="bike-card__media">
+                <span class="bike-card__number" aria-hidden="true">12</span>
+                <img src="assets/motopark/kayo-125.jpg" width="800" height="600" loading="lazy" decoding="async" alt="Kayo 125 из эндуро-парка ZRT">
+              </div>
+              <div class="bike-card__body">
+                <p class="bike-card__fit">Первые шаги в эндуро</p>
+                <h3>Kayo 125</h3>
+                <p>Лёгкий питбайк для знакомства с лесными маршрутами.</p>
+              </div>
+            </article>
+
+            <article class="bike-card">
+              <div class="bike-card__media">
+                <span class="bike-card__number" aria-hidden="true">13</span>
+                <img src="assets/motopark/kews-k12.jpg" width="900" height="675" loading="lazy" decoding="async" alt="Kews K12 из эндуро-парка ZRT">
+              </div>
+              <div class="bike-card__body">
+                <p class="bike-card__fit">Полноразмерный эндуро</p>
+                <h3>Kews K12</h3>
+                <p>Для более уверенного катания по лесу и бездорожью.</p>
+              </div>
+            </article>
+
+            <article class="bike-card">
+              <div class="bike-card__media">
+                <span class="bike-card__number" aria-hidden="true">14</span>
+                <img src="assets/motopark/kews-k23.jpg" width="900" height="675" loading="lazy" decoding="async" alt="Kews K23 из эндуро-парка ZRT">
+              </div>
+              <div class="bike-card__body">
+                <p class="bike-card__fit">Полноразмерный эндуро</p>
+                <h3>Kews K23</h3>
+                <p>Для более уверенного катания по лесу и бездорожью.</p>
+              </div>
+            </article>
+          </div>
+
+          <p class="motopark__note">Конкретную модель тренер подбирает перед занятием: по росту, уровню и формату катания.</p>
+
+          <div class="motopark__cta">
+            <p><strong>Мотоцикл, экипировка и тренер уже входят в занятие.</strong><br>Уточним рост и опыт — подберём подходящую технику.</p>
+            <a class="button button--dark" href="#booking">Подобрать под меня <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+      </section>
 
     <section class="reviews section" id="reviews" aria-label="Отзывы учеников ZRT">
       <div class="container">
@@ -455,5 +638,10 @@ _tmr.push({id: "3788569", type: "pageView", start: (new Date()).getTime()});
       <img src="assets/max-colored.svg" alt="">
     </a>
   </div>
+
+  <a class="back-to-top" href="#top" data-back-to-top aria-label="Вернуться наверх">
+    <span aria-hidden="true">↑</span>
+    <strong>Вверх</strong>
+  </a>
 </body>
 </html>
