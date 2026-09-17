@@ -92,6 +92,26 @@ if (window.location.hash) {
   document.querySelector(window.location.hash)?.scrollIntoView({ behavior: 'auto' });
 }
 
+const backToTop = document.querySelector('[data-back-to-top]');
+
+if (backToTop) {
+  let backToTopFrame = 0;
+
+  const updateBackToTop = () => {
+    backToTop.classList.toggle('is-visible', window.scrollY > Math.max(640, window.innerHeight * 0.75));
+    backToTopFrame = 0;
+  };
+
+  const requestBackToTopUpdate = () => {
+    if (backToTopFrame) return;
+    backToTopFrame = window.requestAnimationFrame(updateBackToTop);
+  };
+
+  window.addEventListener('scroll', requestBackToTopUpdate, { passive: true });
+  window.addEventListener('resize', requestBackToTopUpdate);
+  updateBackToTop();
+}
+
 const phoneInput = document.querySelector('input[name="phone"]');
 
 function formatPhone(value) {
