@@ -1,5 +1,9 @@
 (() => {
   const counterId = 32428555;
+  const scenarioGoals = {
+    beginner: 'scenarioBeginner',
+    experienced: 'scenario_experienced'
+  };
 
   (function (m, e, t, r, i, k, a) {
     m[i] = m[i] || function () {
@@ -30,8 +34,8 @@
     if (!target) return;
 
     const scenario = target.dataset.scenarioSelect;
-    if (scenario === 'beginner' || scenario === 'experienced') {
-      window.zrtMetrikaGoal(`scenario_${scenario}`);
+    if (scenarioGoals[scenario]) {
+      window.zrtMetrikaGoal(scenarioGoals[scenario]);
       return;
     }
 
