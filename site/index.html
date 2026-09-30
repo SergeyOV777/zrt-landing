@@ -1,8 +1,22 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" data-audience="cold">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (() => {
+      const audience = new URLSearchParams(window.location.search).get('audience');
+      if (audience === 'return') document.documentElement.dataset.audience = 'return';
+    })();
+  </script>
+  <style>
+    [data-audience-copy] { display: none; }
+    html[data-audience="cold"] [data-audience-copy="cold"],
+    html[data-audience="return"] [data-audience-copy="return"] { display: block; }
+    @media (max-width: 560px) {
+      h1 [data-audience-copy="cold"] { font-size: clamp(24px, 8vw, 40px); }
+    }
+  </style>
   <script src="yandex-metrika.js"></script>
   <script src="vk-goals.js?v=20260820-scenarios"></script>
   <meta name="description" content="Первое занятие по мотокроссу в ZRT: экипировка, мотоцикл и тренер включены. Скидка 1000 ₽ на первый заезд.">
@@ -70,8 +84,12 @@ _tmr.push({id: "3788569", type: "pageView", start: (new Date()).getTime()});
       </div>
       <div class="hero__content container">
         <p class="eyebrow eyebrow--light"><span></span> Школа мотокросса и эндуро · с 4 лет</p>
-        <h1 id="hero-title">Раз зашёл снова —<br><em>значит зацепило</em></h1>
-        <p class="hero__lead">Обычно так откладывают спортзал, английский и отпуск.<br>Но это всего один заезд.</p>
+        <h1 id="hero-title">
+          <span data-audience-copy="cold">Осень на треке —<br><em>совсем другая</em></span>
+          <span data-audience-copy="return">Раз зашёл снова —<br><em>значит зацепило</em></span>
+        </h1>
+        <p class="hero__lead" data-audience-copy="cold">Мотоцикл, экипировка и тренер уже входят в занятие.<br>Впервые — покажем всё с нуля. Есть опыт — добавим темпа.</p>
+        <p class="hero__lead" data-audience-copy="return">Обычно так откладывают спортзал, английский и отпуск.<br>Но это всего один заезд.</p>
 
         <div class="hero__choice-intro">
           <p>Какой у тебя опыт?</p>
@@ -91,7 +109,8 @@ _tmr.push({id: "3788569", type: "pageView", start: (new Date()).getTime()});
           </button>
         </div>
 
-        <p class="hero__discount"><span>−1000 ₽</span> Скидка на первое занятие никуда не делась</p>
+        <p class="hero__discount" data-audience-copy="cold"><span>−1000 ₽</span> Скидка на первое занятие</p>
+        <p class="hero__discount" data-audience-copy="return"><span>−1000 ₽</span> Скидка на первое занятие никуда не делась</p>
       </div>
       <a class="hero__scroll" href="#scenario"><span></span> Ниже — программа по твоему уровню</a>
     </section>
