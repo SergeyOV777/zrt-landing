@@ -1315,6 +1315,181 @@ body[data-scenario="beginner"] .choice-button--beginner {
   margin-left: 8px;
 }
 
+.gift-certificate {
+  padding: 96px 0;
+  background: var(--paper);
+}
+
+.gift-certificate__card {
+  position: relative;
+  min-height: 650px;
+  padding: 42px 54px 50px;
+  color: var(--white);
+  background: var(--ink);
+  box-shadow: 22px 22px 0 var(--accent);
+  overflow: hidden;
+}
+
+.gift-certificate__topline {
+  position: relative;
+  z-index: 2;
+  min-height: 42px;
+  padding-bottom: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+.gift-certificate__topline .section-index,
+.gift-certificate__topline .section-caption {
+  color: rgba(255,255,255,0.58);
+}
+
+.gift-certificate__topline .section-caption {
+  max-width: none;
+  white-space: nowrap;
+}
+
+.gift-certificate__layout {
+  position: relative;
+  z-index: 1;
+  min-height: 515px;
+  padding-top: 50px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(310px, 0.75fr);
+  gap: clamp(54px, 7vw, 104px);
+}
+
+.gift-certificate__headline {
+  align-self: start;
+}
+
+.gift-certificate__headline .eyebrow {
+  justify-content: flex-start;
+  margin-bottom: 28px;
+  color: rgba(255,255,255,0.58);
+}
+
+.gift-certificate__headline h2 {
+  max-width: 760px;
+  color: var(--white);
+  font-size: clamp(54px, 5.2vw, 82px);
+  line-height: 0.91;
+}
+
+.gift-certificate__headline h2 em {
+  display: block;
+  color: var(--accent);
+}
+
+.gift-certificate__details {
+  position: relative;
+  min-width: 0;
+  padding-top: 76px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.gift-certificate__number {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  color: var(--ink);
+  background: var(--accent);
+  font-size: 10px;
+  font-weight: 900;
+  transform: rotate(5deg);
+}
+
+.gift-certificate__body {
+  width: 100%;
+}
+
+.gift-certificate__body > p {
+  margin: 0;
+  color: rgba(255,255,255,0.78);
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.gift-certificate__options {
+  margin: 26px 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+}
+
+.gift-certificate__options li {
+  padding: 9px 12px;
+  border: 1px solid rgba(255,255,255,0.3);
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.gift-certificate__button {
+  width: 100%;
+  margin-top: 27px;
+  color: var(--ink);
+}
+
+.gift-certificate__button span {
+  font-size: 17px;
+}
+
+.gift-certificate__ghost {
+  position: absolute;
+  z-index: 0;
+  left: 30px;
+  bottom: -0.24em;
+  color: rgba(255,255,255,0.025);
+  font-size: clamp(110px, 14vw, 210px);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.06em;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+@media (max-width: 980px) {
+  .gift-certificate__card {
+    min-height: 0;
+    padding: 34px 36px 38px;
+    box-shadow: 16px 16px 0 var(--accent);
+  }
+
+  .gift-certificate__layout {
+    min-height: 0;
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .gift-certificate__headline h2 {
+    max-width: 680px;
+  }
+
+  .gift-certificate__details {
+    padding-top: 0;
+  }
+
+  .gift-certificate__number {
+    display: none;
+  }
+
+  .gift-certificate__body {
+    max-width: 560px;
+  }
+}
+
 .booking {
   min-height: 790px;
   display: flex;
@@ -2386,6 +2561,74 @@ body[data-scenario="beginner"] .choice-button--beginner {
     min-width: 132px;
     padding: 7px 12px;
     font-size: 8px;
+  }
+
+  .gift-certificate {
+    padding: 64px 0 74px;
+  }
+
+  .gift-certificate__card {
+    padding: 26px 21px 31px;
+    box-shadow: 10px 10px 0 var(--accent);
+  }
+
+  .gift-certificate__topline {
+    display: grid;
+    gap: 8px;
+  }
+
+  .gift-certificate__topline .section-caption {
+    text-align: left;
+  }
+
+  .gift-certificate__topline .section-index,
+  .gift-certificate__topline .section-caption {
+    font-size: 8px;
+    white-space: nowrap;
+  }
+
+  .gift-certificate__layout {
+    padding-top: 38px;
+    gap: 34px;
+  }
+
+  .gift-certificate__headline .eyebrow {
+    margin-bottom: 24px;
+  }
+
+  .gift-certificate__headline h2 {
+    font-size: clamp(32px, 10vw, 42px);
+    line-height: 0.93;
+    letter-spacing: -0.065em;
+  }
+
+  .gift-certificate__body > p {
+    font-size: 13px;
+    line-height: 1.65;
+  }
+
+  .gift-certificate__options {
+    margin-top: 20px;
+    gap: 6px;
+  }
+
+  .gift-certificate__options li {
+    padding: 7px 9px;
+    font-size: 8px;
+  }
+
+  .gift-certificate__button {
+    min-height: 57px;
+    margin-top: 23px;
+    padding-inline: 18px;
+    gap: 18px;
+    font-size: 10px;
+  }
+
+  .gift-certificate__ghost {
+    left: 12px;
+    bottom: -0.16em;
+    font-size: 92px;
   }
 
   .booking {
