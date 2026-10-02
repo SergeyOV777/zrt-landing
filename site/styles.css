@@ -1460,6 +1460,69 @@ body[data-scenario="beginner"] .choice-button--beginner {
   pointer-events: none;
 }
 
+@media (min-width: 981px) {
+  .gift-certificate {
+    padding: 56px 0;
+  }
+
+  .gift-certificate__card {
+    min-height: 440px;
+    padding: 28px 42px 32px;
+  }
+
+  .gift-certificate__topline {
+    min-height: 32px;
+    padding-bottom: 12px;
+  }
+
+  .gift-certificate__layout {
+    min-height: 315px;
+    padding-top: 26px;
+    grid-template-columns: minmax(0, 1.22fr) minmax(330px, 0.78fr);
+    gap: 48px;
+  }
+
+  .gift-certificate__headline .eyebrow {
+    margin-bottom: 16px;
+  }
+
+  .gift-certificate__headline h2 {
+    max-width: 700px;
+    font-size: clamp(44px, 3.75vw, 54px);
+    line-height: 0.9;
+  }
+
+  .gift-certificate__desktop-join {
+    display: none;
+  }
+
+  .gift-certificate__details {
+    min-height: 284px;
+    padding: 62px 24px 22px 26px;
+    align-self: center;
+    align-items: center;
+    border-left: 3px solid var(--accent);
+    background: rgba(255,255,255,0.045);
+  }
+
+  .gift-certificate__number {
+    top: 16px;
+    right: 16px;
+  }
+
+  .gift-certificate__options {
+    margin-top: 18px;
+  }
+
+  .gift-certificate__button {
+    margin-top: 19px;
+  }
+
+  .gift-certificate__ghost {
+    font-size: clamp(100px, 9.2vw, 132px);
+  }
+}
+
 @media (max-width: 980px) {
   .gift-certificate__card {
     min-height: 0;
