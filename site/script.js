@@ -140,6 +140,45 @@ document.querySelector('input[name="name"]')?.addEventListener('input', (event) 
 const form = document.querySelector('#contactForm');
 const successMessage = form?.querySelector('.form-success');
 const errorMessage = form?.querySelector('.form-error');
+const bookingDialog = document.querySelector('#bookingDialog');
+const bookingFormHome = document.querySelector('[data-booking-form-home]');
+const bookingDialogSlot = document.querySelector('[data-booking-dialog-slot]');
+const bookingOpeners = [...document.querySelectorAll('[data-booking-open]')];
+const bookingCloser = document.querySelector('[data-booking-close]');
+let bookingDialogTrigger = null;
+
+function restoreBookingForm() {
+  if (form && bookingFormHome && form.parentElement !== bookingFormHome) {
+    bookingFormHome.append(form);
+  }
+}
+
+function openBookingDialog(event) {
+  if (!form || !bookingDialog || !bookingDialogSlot || typeof bookingDialog.showModal !== 'function') return;
+  if (event instanceof MouseEvent && (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey)) return;
+
+  event.preventDefault();
+  bookingDialogTrigger = event.currentTarget;
+  bookingDialogSlot.append(form);
+  bookingDialog.showModal();
+
+  window.requestAnimationFrame(() => {
+    form.elements.name?.focus({ preventScroll: true });
+  });
+}
+
+bookingOpeners.forEach((opener) => opener.addEventListener('click', openBookingDialog));
+bookingCloser?.addEventListener('click', () => bookingDialog?.close());
+
+bookingDialog?.addEventListener('click', (event) => {
+  if (event.target === bookingDialog) bookingDialog.close();
+});
+
+bookingDialog?.addEventListener('close', () => {
+  restoreBookingForm();
+  bookingDialogTrigger?.focus({ preventScroll: true });
+  bookingDialogTrigger = null;
+});
 
 function showSubmissionError(error) {
   const title = errorMessage?.querySelector('strong');

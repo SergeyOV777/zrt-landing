@@ -13,9 +13,6 @@
     [data-audience-copy] { display: none; }
     html[data-audience="cold"] [data-audience-copy="cold"],
     html[data-audience="return"] [data-audience-copy="return"] { display: block; }
-    @media (max-width: 560px) {
-      h1 [data-audience-copy="cold"] { font-size: clamp(24px, 8vw, 40px); }
-    }
   </style>
   <script src="yandex-metrika.js"></script>
   <script src="vk-goals.js?v=20260820-scenarios"></script>
@@ -27,10 +24,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=20261014-hero-contrast">
   <script src="lead-identifiers.js" defer></script>
   <script src="lead-delivery.js?v=20260818" defer></script>
-  <script src="script.js?v=20260820-vk-lead" defer></script>
+  <script src="script.js?v=20261014-direct-form" defer></script>
   <!-- calltouch -->
   <script>
     (function(w,d,n,c){w.CalltouchDataObject=n;w[n]=function(){w[n]["callbacks"].push(arguments)};if(!w[n]["callbacks"]){w[n]["callbacks"]=[]}w[n]["loaded"]=false;if(typeof c!=="object"){c=[c]}w[n]["counters"]=c;for(var i=0;i<c.length;i+=1){p(c[i])}function p(cId){var a=d.getElementsByTagName("script")[0],s=d.createElement("script"),i=function(){a.parentNode.insertBefore(s,a)},m=typeof Array.prototype.find === 'function',n=m?"init-min.js":"init.js";s.async=true;s.src="https://mod.calltouch.ru/"+n+"?id="+cId;if(w.opera=="[object Opera]"){d.addEventListener("DOMContentLoaded",i,false)}else{i()}}})(window,document,"ct","5869ovws");
@@ -66,7 +63,7 @@ _tmr.push({id: "3788569", type: "pageView", start: (new Date()).getTime()});
       <a class="header-section-link" href="#motopark"><i aria-hidden="true"></i>Мотопарк</a>
       <a class="header-section-link" href="#reviews">Что говорят после заезда</a>
     </div>
-    <a class="header-cta" href="#booking">Записаться <span aria-hidden="true">↘</span></a>
+    <a class="header-cta" href="#booking" data-booking-open>Записаться <span aria-hidden="true">↘</span></a>
     <nav class="header-quicklinks-mobile" aria-label="Быстрые ссылки">
       <a href="#motopark">Мотопарк <span aria-hidden="true">↓</span></a>
       <a href="#reviews" aria-label="Что говорят после заезда">Отзывы <span aria-hidden="true">↓</span></a>
@@ -85,34 +82,22 @@ _tmr.push({id: "3788569", type: "pageView", start: (new Date()).getTime()});
       <div class="hero__content container">
         <p class="eyebrow eyebrow--light"><span></span> Школа мотокросса и эндуро · с 4 лет</p>
         <h1 id="hero-title">
-          <span data-audience-copy="cold">Осень на треке —<br><em>совсем другая</em></span>
+          <span data-audience-copy="cold">Кайфуй, а не<br><em>стрессуй</em></span>
           <span data-audience-copy="return">Раз зашёл снова —<br><em>значит зацепило</em></span>
         </h1>
-        <p class="hero__lead" data-audience-copy="cold">Мотоцикл, экипировка и тренер уже входят в занятие.<br>Впервые — покажем всё с нуля. Есть опыт — добавим темпа.</p>
-        <p class="hero__lead" data-audience-copy="return">Обычно так откладывают спортзал, английский и отпуск.<br>Но это всего один заезд.</p>
-
-        <div class="hero__choice-intro">
-          <p>Какой у тебя опыт?</p>
-          <span>Выбери вариант — покажем подходящую тренировку</span>
-        </div>
-
-        <div class="hero__choice" aria-label="Выберите опыт — страница покажет подходящую тренировку">
-          <button class="choice-button choice-button--beginner is-active" type="button" data-scenario-select="beginner" aria-pressed="true">
-            <span class="choice-button__dot"></span>
-            <span class="choice-button__copy"><strong>Еду впервые</strong><small>Показать программу</small></span>
-            <span aria-hidden="true">↓</span>
-          </button>
-          <button class="choice-button choice-button--experienced" type="button" data-scenario-select="experienced" aria-pressed="false">
-            <span class="choice-button__dot"></span>
-            <span class="choice-button__copy"><strong>Уже катался</strong><small>Показать программу</small></span>
-            <span aria-hidden="true">↓</span>
-          </button>
-        </div>
+        <p class="hero__lead" data-audience-copy="cold">90 минут на трассе — и стресса как не бывало.<br>Мотоцикл, экипировка и тренер уже включены.</p>
+        <p class="hero__lead" data-audience-copy="return">Ты уже знаешь, зачем вернулся. Осталось выбрать день.<br>Мотоцикл, экипировка и тренер уже включены.</p>
+        <p class="hero__proof"><strong>30 000+</strong> человек тренировались в ZRT</p>
 
         <p class="hero__discount" data-audience-copy="cold"><span>−1000 ₽</span> Скидка на первое занятие</p>
         <p class="hero__discount" data-audience-copy="return"><span>−1000 ₽</span> Скидка на первое занятие никуда не делась</p>
+        <div class="hero__actions">
+          <a class="button button--accent hero__cta" href="#booking" data-booking-open>
+            Хочу кайфовать <span aria-hidden="true">↗</span>
+          </a>
+        </div>
       </div>
-      <a class="hero__scroll" href="#scenario"><span></span> Ниже — программа по твоему уровню</a>
+      <a class="hero__scroll" href="#scenario"><span></span> Ниже — выбрать свой уровень</a>
     </section>
 
     <section class="proof-strip" aria-label="ZRT в цифрах">
@@ -123,13 +108,41 @@ _tmr.push({id: "3788569", type: "pageView", start: (new Date()).getTime()});
       </div>
     </section>
 
-    <section class="scenario section" id="scenario" aria-label="Сценарий тренировки">
+    <section class="scenario section" id="scenario" aria-labelledby="scenario-choice-title">
       <div class="container">
         <div class="section-topline">
           <p class="section-index">02 / ВЫБЕРИ СВОЙ ТЕМП</p>
-          <div class="scenario-tabs" aria-label="Переключить сценарий">
-            <button type="button" data-scenario-select="beginner" class="is-active" aria-pressed="true">Первый раз</button>
-            <button type="button" data-scenario-select="experienced" aria-pressed="false">Уже катался</button>
+          <p class="section-caption">Программа под твой опыт</p>
+        </div>
+
+        <div class="scenario-picker">
+          <div class="scenario-picker__intro">
+            <p class="scenario-picker__title" id="scenario-choice-title">Какой у тебя опыт?</p>
+            <p class="scenario-picker__hint">Нажми на свой вариант — ниже сразу покажем подходящую тренировку.</p>
+          </div>
+          <div class="scenario-picker__options" role="group" aria-labelledby="scenario-choice-title">
+            <button class="scenario-option scenario-option--beginner is-active" type="button" data-scenario-select="beginner" aria-pressed="true">
+              <span class="scenario-option__number" aria-hidden="true">01</span>
+              <span class="scenario-option__copy">
+                <strong>Начинаю с нуля</strong>
+                <small>Не ездил или пробовал всего пару раз</small>
+              </span>
+              <span class="scenario-option__status" aria-hidden="true">
+                <span class="scenario-option__status-idle">Выбрать <b>↗</b></span>
+                <span class="scenario-option__status-active">Выбрано <b>✓</b></span>
+              </span>
+            </button>
+            <button class="scenario-option scenario-option--experienced" type="button" data-scenario-select="experienced" aria-pressed="false">
+              <span class="scenario-option__number" aria-hidden="true">02</span>
+              <span class="scenario-option__copy">
+                <strong>Уверенно езжу</strong>
+                <small>Есть база — хочу больше техники и темпа</small>
+              </span>
+              <span class="scenario-option__status" aria-hidden="true">
+                <span class="scenario-option__status-idle">Выбрать <b>↗</b></span>
+                <span class="scenario-option__status-active">Выбрано <b>✓</b></span>
+              </span>
+            </button>
           </div>
         </div>
 
@@ -143,7 +156,7 @@ _tmr.push({id: "3788569", type: "pageView", start: (new Date()).getTime()});
                 <p>Мы всё показываем с нуля. Инструктор рядом. Спокойно. Без гонки.</p>
                 <p class="scenario__result">Через 20–30 минут ты уже едешь сам.</p>
               </div>
-              <a class="button button--accent" href="#booking">Хочу первый заезд <span aria-hidden="true">↗</span></a>
+              <a class="button button--accent" href="#booking" data-booking-open>Хочу первый заезд <span aria-hidden="true">↗</span></a>
               <p class="button-note">Без опыта — это ок</p>
             </div>
 
@@ -155,7 +168,7 @@ _tmr.push({id: "3788569", type: "pageView", start: (new Date()).getTime()});
                 <p>Подберём технику мощнее, разберём ошибки, добавим скорости и контроля.</p>
                 <p class="scenario__result">Не «покататься кружочек». Выйти на уровень выше.</p>
               </div>
-              <a class="button button--accent" href="#booking">Прокачать уровень <span aria-hidden="true">↗</span></a>
+              <a class="button button--accent" href="#booking" data-booking-open>Прокачать уровень <span aria-hidden="true">↗</span></a>
               <p class="button-note">Гарантировано интересно</p>
             </div>
           </div>
@@ -205,7 +218,7 @@ _tmr.push({id: "3788569", type: "pageView", start: (new Date()).getTime()});
           </ol>
           <div class="training__footer">
             <p>Ты не обязан быть готовым.<br><strong>Мы всё разложим по шагам.</strong></p>
-            <a class="button button--accent" href="#booking">Хочу первый заезд <span aria-hidden="true">↗</span></a>
+            <a class="button button--accent" href="#booking" data-booking-open>Хочу первый заезд <span aria-hidden="true">↗</span></a>
           </div>
         </div>
 
@@ -220,7 +233,7 @@ _tmr.push({id: "3788569", type: "pageView", start: (new Date()).getTime()});
           <div class="training__footer">
             <p>Не «кружочек покататься».<br><strong>Это реально прокачка.</strong></p>
             <div>
-              <a class="button button--accent" href="#booking">Вкатиться на уровень <span aria-hidden="true">↗</span></a>
+              <a class="button button--accent" href="#booking" data-booking-open>Вкатиться на уровень <span aria-hidden="true">↗</span></a>
               <p class="button-note button-note--dark">Гарантировано интересно</p>
             </div>
           </div>
@@ -421,7 +434,7 @@ _tmr.push({id: "3788569", type: "pageView", start: (new Date()).getTime()});
 
           <div class="motopark__cta">
             <p><strong>Мотоцикл, экипировка и тренер уже входят в занятие.</strong><br>Уточним рост и опыт — подберём подходящую технику.</p>
-            <a class="button button--dark" href="#booking">Подобрать под меня <span aria-hidden="true">↗</span></a>
+            <a class="button button--dark" href="#booking" data-booking-open>Подобрать под меня <span aria-hidden="true">↗</span></a>
           </div>
         </div>
       </section>
@@ -541,7 +554,7 @@ _tmr.push({id: "3788569", type: "pageView", start: (new Date()).getTime()});
     <section class="booking section section--dark" id="booking" aria-label="Запись на тренировку">
       <div class="booking__media" aria-hidden="true"></div>
       <div class="booking__shade" aria-hidden="true"></div>
-      <div class="container booking__layout">
+      <div class="container booking__layout" data-booking-form-home>
         <div class="booking__copy">
           <p class="eyebrow eyebrow--light"><span></span> Остался один шаг</p>
 
@@ -568,7 +581,7 @@ _tmr.push({id: "3788569", type: "pageView", start: (new Date()).getTime()});
 
         <form class="booking-form" id="contactForm" novalidate>
           <div class="booking-form__top">
-            <p>Запись на тренировку</p>
+            <p id="bookingDialogTitle">Запись на тренировку</p>
             <span>−1000 ₽</span>
           </div>
           <label>
@@ -608,8 +621,7 @@ _tmr.push({id: "3788569", type: "pageView", start: (new Date()).getTime()});
           </fieldset>
           <p class="booking-form__discount"><strong>Скидка 1000 ₽ закреплена.</strong><br>Менеджер уточнит удобные дату и время.</p>
           <button class="button button--accent button--submit" type="submit">
-            <span data-variant="beginner">Забронировать лучший выходной</span>
-            <span data-variant="experienced" hidden>Прокачать уровень</span>
+            <span>Записаться со скидкой</span>
             <i aria-hidden="true">↗</i>
           </button>
           <label class="privacy">
@@ -656,6 +668,15 @@ _tmr.push({id: "3788569", type: "pageView", start: (new Date()).getTime()});
       </div>
     </section>
   </main>
+
+  <dialog class="booking-dialog" id="bookingDialog" aria-labelledby="bookingDialogTitle">
+    <div class="booking-dialog__shell">
+      <button class="booking-dialog__close" type="button" data-booking-close aria-label="Закрыть форму записи">
+        <span aria-hidden="true">×</span>
+      </button>
+      <div class="booking-dialog__slot" data-booking-dialog-slot></div>
+    </div>
+  </dialog>
 
   <footer class="site-footer">
     <div class="container footer-main">
