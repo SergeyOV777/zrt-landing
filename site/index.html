@@ -24,7 +24,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261014-direct-form">
+  <link rel="stylesheet" href="styles.css?v=20261014-level-choice">
   <script src="lead-identifiers.js" defer></script>
   <script src="lead-delivery.js?v=20260818" defer></script>
   <script src="script.js?v=20261014-direct-form" defer></script>
@@ -108,13 +108,41 @@ _tmr.push({id: "3788569", type: "pageView", start: (new Date()).getTime()});
       </div>
     </section>
 
-    <section class="scenario section" id="scenario" aria-label="Сценарий тренировки">
+    <section class="scenario section" id="scenario" aria-labelledby="scenario-choice-title">
       <div class="container">
         <div class="section-topline">
           <p class="section-index">02 / ВЫБЕРИ СВОЙ ТЕМП</p>
-          <div class="scenario-tabs" aria-label="Переключить сценарий">
-            <button type="button" data-scenario-select="beginner" class="is-active" aria-pressed="true">Первый раз</button>
-            <button type="button" data-scenario-select="experienced" aria-pressed="false">Уже катался</button>
+          <p class="section-caption">Программа под твой опыт</p>
+        </div>
+
+        <div class="scenario-picker">
+          <div class="scenario-picker__intro">
+            <p class="scenario-picker__title" id="scenario-choice-title">Какой у тебя опыт?</p>
+            <p class="scenario-picker__hint">Нажми на свой вариант — ниже сразу покажем подходящую тренировку.</p>
+          </div>
+          <div class="scenario-picker__options" role="group" aria-labelledby="scenario-choice-title">
+            <button class="scenario-option scenario-option--beginner is-active" type="button" data-scenario-select="beginner" aria-pressed="true">
+              <span class="scenario-option__number" aria-hidden="true">01</span>
+              <span class="scenario-option__copy">
+                <strong>Начинаю с нуля</strong>
+                <small>Не ездил или пробовал всего пару раз</small>
+              </span>
+              <span class="scenario-option__status" aria-hidden="true">
+                <span class="scenario-option__status-idle">Выбрать <b>↗</b></span>
+                <span class="scenario-option__status-active">Выбрано <b>✓</b></span>
+              </span>
+            </button>
+            <button class="scenario-option scenario-option--experienced" type="button" data-scenario-select="experienced" aria-pressed="false">
+              <span class="scenario-option__number" aria-hidden="true">02</span>
+              <span class="scenario-option__copy">
+                <strong>Уверенно езжу</strong>
+                <small>Есть база — хочу больше техники и темпа</small>
+              </span>
+              <span class="scenario-option__status" aria-hidden="true">
+                <span class="scenario-option__status-idle">Выбрать <b>↗</b></span>
+                <span class="scenario-option__status-active">Выбрано <b>✓</b></span>
+              </span>
+            </button>
           </div>
         </div>
 

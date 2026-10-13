@@ -4,7 +4,7 @@
   --white: #ffffff;
   --line: rgba(17, 17, 17, 0.18);
   --lime: #c9f34b;
-  --orange: #ff5b45;
+  --purple: #3d2688;
   --accent: var(--lime);
   --accent-ink: #111111;
   --container: 1240px;
@@ -12,7 +12,7 @@
 }
 
 body[data-scenario="experienced"] {
-  --accent: var(--orange);
+  --accent: var(--purple);
   --accent-ink: #ffffff;
 }
 
@@ -347,7 +347,6 @@ h2 em {
   transform: rotate(-45deg);
 }
 
-.scenario-tabs button:focus-visible,
 .button:focus-visible,
 input:focus-visible,
 .booking-dialog__close:focus-visible {
@@ -492,39 +491,155 @@ input:focus-visible,
   text-align: right;
 }
 
-.scenario-tabs {
-  display: flex;
-  gap: 26px;
+.scenario-picker {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: minmax(220px, 0.62fr) minmax(0, 1.38fr);
+  gap: clamp(30px, 5vw, 76px);
+  align-items: center;
 }
 
-.scenario-tabs button {
-  position: relative;
-  padding: 0 0 8px;
-  cursor: pointer;
-  color: #77766f;
-  background: none;
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.12em;
+.scenario-picker__intro {
+  max-width: 330px;
+}
+
+.scenario-picker__title {
+  margin: 0;
+  font-size: clamp(26px, 3vw, 42px);
+  font-weight: 900;
+  letter-spacing: -0.055em;
+  line-height: 0.98;
   text-transform: uppercase;
 }
 
-.scenario-tabs button::after {
-  content: "";
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  height: 3px;
-  background: transparent;
+.scenario-picker__hint {
+  max-width: 310px;
+  margin: 14px 0 0;
+  color: #66655f;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.5;
 }
 
-.scenario-tabs button.is-active {
+.scenario-picker__options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.scenario-option {
+  position: relative;
+  min-width: 0;
+  min-height: 144px;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr);
+  grid-template-rows: 1fr auto;
+  gap: 12px 14px;
+  overflow: hidden;
   color: var(--ink);
+  background: var(--white);
+  border: 2px solid var(--ink);
+  cursor: pointer;
+  text-align: left;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
 }
 
-.scenario-tabs button.is-active::after {
+.scenario-option:hover {
+  transform: translateY(-3px);
+}
+
+.scenario-option:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 4px;
+}
+
+.scenario-option.is-active {
+  color: var(--accent-ink);
   background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 8px 8px 0 var(--ink);
+}
+
+.scenario-option--experienced:not(.is-active) {
+  border-color: var(--purple);
+}
+
+.scenario-option__number {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  color: var(--white);
+  background: var(--ink);
+  border-radius: 50%;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+.scenario-option--experienced:not(.is-active) .scenario-option__number {
+  background: var(--purple);
+}
+
+.scenario-option.is-active .scenario-option__number {
+  color: var(--white);
+  background: var(--ink);
+}
+
+.scenario-option__copy {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.scenario-option__copy strong {
+  font-size: clamp(16px, 1.7vw, 21px);
+  font-weight: 900;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
+.scenario-option__copy small {
+  color: #6f6d66;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.scenario-option.is-active .scenario-option__copy small {
+  color: currentColor;
+  opacity: 0.72;
+}
+
+.scenario-option__status {
+  grid-column: 2;
+  align-self: end;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.scenario-option--experienced:not(.is-active) .scenario-option__status {
+  color: var(--purple);
+}
+
+.scenario-option__status b {
+  margin-left: 4px;
+  font-size: 13px;
+}
+
+.scenario-option__status-active,
+.scenario-option.is-active .scenario-option__status-idle {
+  display: none;
+}
+
+.scenario-option.is-active .scenario-option__status-active {
+  display: inline;
 }
 
 .scenario__layout {
@@ -2432,9 +2547,21 @@ input:focus-visible,
     text-align: left;
   }
 
-  .scenario-tabs {
-    width: 100%;
-    justify-content: space-between;
+  .scenario-picker {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .scenario-picker__intro {
+    max-width: 560px;
+  }
+
+  .scenario-picker__options {
+    grid-template-columns: 1fr;
+  }
+
+  .scenario-option {
+    min-height: 118px;
   }
 
   .scenario__layout,
