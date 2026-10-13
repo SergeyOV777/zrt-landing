@@ -305,114 +305,54 @@ h2 em {
   color: rgba(255,255,255,0.82);
 }
 
-.hero__choice-intro {
-  margin: 30px auto 0;
-  color: var(--white);
-}
-
-.hero__choice-intro p {
-  margin: 0;
+.hero__proof {
+  margin: 24px 0 0;
+  color: rgba(255,255,255,0.82);
   font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.hero__proof strong {
+  color: var(--accent);
+  font-size: 15px;
   font-weight: 900;
-  letter-spacing: 0.11em;
-  text-transform: uppercase;
 }
 
-.hero__choice-intro span {
-  display: block;
-  margin-top: 6px;
-  color: rgba(255,255,255,0.68);
-  font-size: 11px;
-  line-height: 1.45;
-}
-
-.hero__choice {
+.hero__actions {
+  margin-top: 28px;
   display: flex;
   justify-content: center;
-  gap: 10px;
-  margin-top: 14px;
 }
 
-.choice-button {
-  min-width: 230px;
-  min-height: 70px;
-  padding: 0 22px;
+.hero__cta {
+  min-width: 290px;
+  min-height: 66px;
+  padding-left: 26px;
+  box-shadow: 0 16px 44px rgba(0,0,0,0.24);
+}
+
+.hero__cta > span {
+  width: 34px;
+  height: 34px;
   display: grid;
-  grid-template-columns: 12px 1fr auto;
-  align-items: center;
-  gap: 12px;
-  cursor: pointer;
-  font-size: 13px;
-  font-weight: 800;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  place-items: center;
+  color: var(--white);
+  background: var(--ink);
+  transition: transform 0.2s ease;
 }
 
-.choice-button__copy {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 4px;
-  text-align: left;
+.hero__cta:hover > span,
+.hero__cta:focus-visible > span {
+  transform: rotate(-45deg);
 }
 
-.choice-button__copy strong {
-  font-size: 13px;
-  line-height: 1.1;
-}
-
-.choice-button__copy small {
-  font-size: 8px;
-  font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: 0.06em;
-  opacity: 0.66;
-  text-transform: uppercase;
-}
-
-.choice-button:hover,
-.choice-button:focus-visible,
-.choice-button.is-active {
-  transform: translateY(-4px);
-}
-
-.choice-button:focus-visible,
 .scenario-tabs button:focus-visible,
 .button:focus-visible,
-input:focus-visible {
+input:focus-visible,
+.booking-dialog__close:focus-visible {
   outline: 3px solid var(--white);
   outline-offset: 3px;
-}
-
-.choice-button--beginner {
-  color: var(--ink);
-  background: var(--lime);
-}
-
-.choice-button--experienced {
-  color: var(--white);
-  background: #0c0c0c;
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.28);
-}
-
-body[data-scenario="experienced"] .choice-button--experienced {
-  box-shadow: inset 0 0 0 3px var(--orange);
-}
-
-body[data-scenario="beginner"] .choice-button--beginner {
-  box-shadow: inset 0 0 0 3px rgba(17,17,17,0.3);
-}
-
-.choice-button__dot {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: currentColor;
-}
-
-.choice-button--beginner .choice-button__dot {
-  background: #4f7f00;
 }
 
 .hero__discount {
@@ -1640,6 +1580,61 @@ body[data-scenario="beginner"] .choice-button--beginner {
   background: var(--paper);
 }
 
+.booking-dialog {
+  width: min(480px, calc(100% - 32px));
+  max-width: none;
+  max-height: calc(100dvh - 32px);
+  margin: auto;
+  padding: 0;
+  overflow: visible;
+  border: 0;
+  color: var(--ink);
+  background: transparent;
+}
+
+.booking-dialog::backdrop {
+  background: rgba(8,8,8,0.78);
+  backdrop-filter: blur(7px);
+}
+
+.booking-dialog__shell {
+  position: relative;
+  overflow: hidden;
+  background: var(--paper);
+  box-shadow: 0 28px 90px rgba(0,0,0,0.46);
+}
+
+.booking-dialog__slot {
+  max-height: calc(100dvh - 32px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.booking-dialog__close {
+  position: absolute;
+  z-index: 2;
+  top: 12px;
+  right: 12px;
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  color: var(--white);
+  background: var(--ink);
+  font-size: 25px;
+  line-height: 1;
+}
+
+.booking-dialog .booking-form {
+  width: 100%;
+  max-width: none;
+}
+
+.booking-dialog .booking-form__top {
+  padding-right: 42px;
+}
+
 .booking-form__top {
   margin-bottom: 30px;
   padding-bottom: 18px;
@@ -2231,15 +2226,6 @@ body[data-scenario="beginner"] .choice-button--beginner {
     background-position: 58% center;
   }
 
-  .hero__choice {
-    align-items: stretch;
-  }
-
-  .choice-button {
-    min-width: 0;
-    width: 220px;
-  }
-
   .scenario__layout,
   .booking__layout {
     grid-template-columns: 1fr;
@@ -2391,27 +2377,20 @@ body[data-scenario="beginner"] .choice-button--beginner {
     display: none;
   }
 
-  .hero__choice-intro {
+  .hero__proof {
     max-width: 310px;
+    margin: 20px auto 0;
+    line-height: 1.45;
+  }
+
+  .hero__actions {
     margin-top: 24px;
   }
 
-  .hero__choice-intro p {
-    font-size: 11px;
-  }
-
-  .hero__choice-intro span {
-    font-size: 10px;
-  }
-
-  .hero__choice {
-    margin-top: 12px;
-    display: grid;
-  }
-
-  .choice-button {
+  .hero__cta {
     width: min(100%, 330px);
-    min-height: 64px;
+    min-width: 0;
+    min-height: 62px;
   }
 
   .hero__discount {
@@ -2712,6 +2691,20 @@ body[data-scenario="beginner"] .choice-button--beginner {
 
   .booking-form {
     padding: 25px 20px;
+  }
+
+  .booking-dialog {
+    width: calc(100% - 16px);
+    max-height: calc(100dvh - 16px);
+  }
+
+  .booking-dialog__slot {
+    max-height: calc(100dvh - 16px);
+  }
+
+  .booking-dialog__close {
+    top: 8px;
+    right: 8px;
   }
 
   .contact-options {
